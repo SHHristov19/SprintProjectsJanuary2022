@@ -1,5 +1,7 @@
 #include <iostream>
 #include <conio.h>
+#include <fstream>
+#include <string>
 using namespace std;
 
 //Declare button ^
@@ -224,11 +226,60 @@ void printActiveExit()
 	activeExit();
 }
 
-int main()
-{
 
+void inputDataInFile()
+{
+	string title, year, place, latitude, longitude, description;
+	bool dataAddCorrectly = false;
+	ofstream file("Data.csv", ios_base::app);
+	if (!file.is_open())
+	{
+		cout << "Error opening file";
+	}
+	else
+	{
+		cout << "Enter the title of the History event : ";
+		getline(cin, title);
+		file << title << ",";
+		cout << "Enter the year of the History event : ";
+		getline(cin, year);
+		file << year << ",";
+		cout << "Enter where exactly happened this event : ";
+		getline(cin, place);
+		file << place << ",";
+		cout << "Enter the latitude of this place : ";
+		getline(cin, latitude);
+		file << latitude << ",";
+		cout << "Enter the longitude of this place : ";
+		getline(cin, longitude);
+		file << longitude << ",";
+		cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA !!!  ";
+		cout << "\x1b[1;37m" << "Enter what's happened in this place : ";
+		getline(cin, description);
+		while (dataAddCorrectly == false)
+		{
+			if (description.find(',') != string::npos)
+			{
+				system("CLS");
+				cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA !!!  ";
+				cout << "\x1b[1;37m" << "Enter what's happened in this place : ";
+				getline(cin, description);
+			}
+			else
+			{
+				dataAddCorrectly = true;
+				file << description << endl;
+				system("CLS");
+				cout << "The data are added correctly" << endl;
+			}
+		}
+		file.close();
+	}
+}
+bool loopmovement(int choice)
+{
 	printActiveSeeStory();
-	int choice = 1;
+	choice = 1;
 	while (true) {
 		switch (_getch()) {
 		case KEY_UP:
@@ -317,6 +368,7 @@ int main()
 			if (choice == 2)
 			{
 				system("CLS");
+				inputDataInFile();
 				choice = 7;
 				writeBackWhite();
 				break;
@@ -359,4 +411,9 @@ int main()
 			break;
 		}
 	}
+}
+int main()
+{
+	int choice = 1;
+	loopmovement(choice);
 }
