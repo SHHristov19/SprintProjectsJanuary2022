@@ -510,6 +510,69 @@ void inputDataInFile()
 	}
 }
 
+void readDataFromFile()
+{
+	NODE* data = new NODE;
+	ifstream output("Data.csv", ios_base::app);
+	string title, year, place, latitude, longitude, description;
+	int counter = 0;
+	string str;
+	int firstRow = 0;
+	if (!output.is_open())
+	{
+		cout << "Error opening file";
+	}
+	else
+	{
+		while (!output.eof())
+		{
+			getline(output, str);
+			if (firstRow > 0 && str != "")
+			{
+				counter = 0;
+				title = year = place = latitude = longitude = description = "";
+				for (size_t i = 0; i < str.size(); i++)
+				{
+					if (str[i] == ',')
+					{
+						counter++;
+						str.erase(i, 0);
+					}
+					else if (counter == 0)
+					{
+						title += str[i];
+					}
+					else if (counter == 1)
+					{
+						year += str[i];
+					}
+					else if (counter == 2)
+					{
+						place += str[i];
+					}
+					else if (counter == 3)
+					{
+						latitude += str[i];
+					}
+					else if (counter == 4)
+					{
+						longitude += str[i];
+					}
+					else if (counter == 5)
+					{
+						description += str[i];
+					}
+
+				}
+				addNode(data, title, year, place, latitude, longitude, description);
+			}
+			firstRow++;
+		}
+		output.close();
+	}
+	printList(data);
+}
+
 bool loopmovement(int choice)
 {
 	printActiveSeeStory();
@@ -594,6 +657,7 @@ bool loopmovement(int choice)
 			if (choice == 1)
 			{
 				system("CLS");
+				readDataFromFile();
 				choice = 7;
 				writeBackWhite();
 				break;
