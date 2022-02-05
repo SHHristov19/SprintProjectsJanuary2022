@@ -19,6 +19,17 @@ using namespace std;
 //Declare button Enter
 #define KEY_ENTER 13 
 
+struct NODE
+{
+	string title;
+	string year;
+	string place;
+	string latitude;
+	string longitude;
+	string description;
+	NODE* next = NULL;
+};
+
 void activeSeeStory()
 {
 	cout << endl << endl << endl << endl << endl << endl;
@@ -226,56 +237,279 @@ void printActiveExit()
 	activeExit();
 }
 
+void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription)
+{
+	NODE* newNode = new NODE;
+	newNode->title = nodeDataTitle;
+	newNode->year = nodeDataYear;
+	newNode->place = nodeDataPlace;
+	newNode->latitude = nodeDataLatitude;
+	newNode->longitude = nodeDataLongitude;
+	newNode->description = nodeDataDescription;
+	newNode->next = NULL;
+	NODE* temp = head;
+	while (temp)
+	{
+		if (temp->next == NULL)
+		{
+			temp->next = newNode;
+			return;
+		}
+		temp = temp->next;
+	}
+}
+
+void deleteTtitle(NODE* head, string nodeDataTitle)
+{
+	NODE* newNode = new NODE;
+	newNode->title = nodeDataTitle;
+	head->next = NULL;
+	head = newNode;
+}
+
+void deleteYear(NODE* head, string nodeDataYear)
+{
+	NODE* newNode = new NODE;
+	newNode->year = nodeDataYear;
+	head->next = NULL;
+	head = newNode;
+}
+
+void deletePlace(NODE* head, string nodeDataPlace)
+{
+	NODE* newNode = new NODE;
+	newNode->place = nodeDataPlace;
+	head->next = NULL;
+	head = newNode;
+}
+
+void deleteLatitude(NODE* head, string nodeDataLatitude)
+{
+	NODE* newNode = new NODE;
+	newNode->latitude = nodeDataLatitude;
+	head->next = NULL;
+	head = newNode;
+}
+
+void deleteLongitude(NODE* head, string nodeDataLongitude)
+{
+	NODE* newNode = new NODE;
+	newNode->longitude = nodeDataLongitude;
+	head->next = NULL;
+	head = newNode;
+}
+
+void deleteDescription(NODE* head, string nodeDataDescription)
+{
+	NODE* newNode = new NODE;
+	newNode->description = nodeDataDescription;
+	head->next = NULL;
+	head = newNode;
+}
+
+void printList(NODE* head)
+{
+	NODE* temp = head->next;
+	if (temp != NULL) {
+		while (temp != NULL) {
+			cout << endl << "Title : " << temp->title << endl;
+			cout << "Year : " << temp->year << endl;
+			cout << "Place : " << temp->place << endl;
+			cout << "Latitude : " << temp->latitude << endl;
+			cout << "Longitude : " << temp->longitude << endl;
+			cout << "Description : " << temp->description << endl;
+			temp = temp->next;
+		}
+		cout << endl;
+	}
+	else {
+		cout << "The list is empty.\n";
+	}
+}
+
+void check(bool dataAddCorrectly, string& data)
+{
+	string check = data;
+	while (dataAddCorrectly == false)
+	{
+		if (check.find(',') != string::npos || check.find(':') != string::npos || check.find(';') != string::npos)
+		{
+			system("CLS");
+			cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m";
+			getline(cin, check);
+			data = check;
+		}
+		else
+		{
+			dataAddCorrectly = true;
+			system("CLS");
+		}
+	}
+}
+
+void cinTitle(string* title, bool dataAddCorrectly)
+{
+	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "Enter the title of the History event : ";
+	getline(cin, *title);
+	check(dataAddCorrectly, *title);
+	dataAddCorrectly = false;
+}
+
+void cinYear(string* year, bool dataAddCorrectly)
+{
+	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "Enter the year of the History event : ";
+	getline(cin, *year);
+	check(dataAddCorrectly, *year);
+	dataAddCorrectly = false;
+}
+
+void cinPlace(string* place, bool dataAddCorrectly)
+{
+	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "Enter where exactly happened this event : ";
+	getline(cin, *place);
+	check(dataAddCorrectly, *place);
+	dataAddCorrectly = false;
+}
+
+void cinLatitude(string* latitude, bool dataAddCorrectly)
+{
+	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "Enter the latitude of this place : ";
+	getline(cin, *latitude);
+	check(dataAddCorrectly, *latitude);
+	dataAddCorrectly = false;
+}
+
+void cinLongitude(string* longitude, bool dataAddCorrectly)
+{
+	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "Enter the longitude of this place : ";
+	getline(cin, *longitude);
+	check(dataAddCorrectly, *longitude);
+	dataAddCorrectly = false;
+}
+
+void cinDescription(string* description, bool dataAddCorrectly)
+{
+	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "Enter what's happened in this place : ";
+	getline(cin, *description);
+	check(dataAddCorrectly, *description);
+	dataAddCorrectly = false;
+}
 
 void inputDataInFile()
 {
+	NODE* data = new NODE;
 	string title, year, place, latitude, longitude, description;
-	bool dataAddCorrectly = false;
+	bool dataAddCorrectly = false, truth = true, question;
+	int choice = 1;
+	string sign;
 	ofstream file("Data.csv", ios_base::app);
-	if (!file.is_open())
+	while (truth)
 	{
-		cout << "Error opening file";
-	}
-	else
-	{
-		cout << "Enter the title of the History event : ";
-		getline(cin, title);
-		file << title << ",";
-		cout << "Enter the year of the History event : ";
-		getline(cin, year);
-		file << year << ",";
-		cout << "Enter where exactly happened this event : ";
-		getline(cin, place);
-		file << place << ",";
-		cout << "Enter the latitude of this place : ";
-		getline(cin, latitude);
-		file << latitude << ",";
-		cout << "Enter the longitude of this place : ";
-		getline(cin, longitude);
-		file << longitude << ",";
-		cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA !!!  ";
-		cout << "\x1b[1;37m" << "Enter what's happened in this place : ";
-		getline(cin, description);
-		while (dataAddCorrectly == false)
+		switch (choice)
 		{
-			if (description.find(',') != string::npos)
+		case 1:
+			cinTitle(&title, dataAddCorrectly);
+			cinYear(&year, dataAddCorrectly);
+			cinPlace(&place, dataAddCorrectly);
+			cinLatitude(&latitude, dataAddCorrectly);
+			cinLongitude(&longitude, dataAddCorrectly);
+			cinDescription(&description, dataAddCorrectly);
+			addNode(data, title, year, place, latitude, longitude, description);
+			system("CLS");
+			cout << "Do you want to see what you add? [Y/N]" << endl;
+			getline(cin, sign);
+			if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+			{
+				printList(data);
+				question = true;
+				while (question)
+				{
+					cout << endl << "Do you want to change any data? [Y/N]" << endl;
+					getline(cin, sign);
+					if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+					{
+						cout << endl << "Which data do you want to change?  [title/year/place/latitude/description] " << endl;
+						getline(cin, sign);
+						cout << endl;
+						if (sign == "title" || sign == "Title")
+						{
+							cinTitle(&title, dataAddCorrectly);
+							deleteTtitle(data, title);
+						}
+						else if (sign == "year" || sign == "Year")
+						{
+							cinYear(&year, dataAddCorrectly);
+							deleteYear(data, year);
+						}
+						else if (sign == "place" || sign == "Place")
+						{
+							cinPlace(&year, dataAddCorrectly);
+							deletePlace(data, place);
+						}
+						else if (sign == "latitude" || sign == "Latitude")
+						{
+							cinLatitude(&latitude, dataAddCorrectly);
+							deleteLatitude(data, latitude);
+						}
+						else if (sign == "longitude" || sign == "Longitude")
+						{
+							cinLongitude(&longitude, dataAddCorrectly);
+							deleteLongitude(data, longitude);
+						}
+						else if (sign == "description" || sign == "Description")
+						{
+							cinDescription(&year, dataAddCorrectly);
+							deleteDescription(data, description);
+						}
+						cout << "Do you want to see what you add? [Y/N]" << endl;
+						getline(cin, sign);
+						if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+						{
+							addNode(data, title, year, place, latitude, longitude, description);
+							printList(data);
+						}
+					}
+					else
+					{
+						question = false;
+					}
+				}
+			}
+
+			file << title << "," << year << "," << place << "," << latitude << "," << longitude << "," << description << endl;
+
+			system("CLS");
+			cout << "Do you want to add another data? [Y/N]" << endl;
+			getline(cin, sign);
+			if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 			{
 				system("CLS");
-				cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA !!!  ";
-				cout << "\x1b[1;37m" << "Enter what's happened in this place : ";
-				getline(cin, description);
+				choice = 1;
+				break;
 			}
 			else
 			{
-				dataAddCorrectly = true;
-				file << description << endl;
 				system("CLS");
-				cout << "The data are added correctly" << endl;
+				choice = 2;
+				break;
 			}
+		case 2:
+			cout << "The Data added correctly!" << endl << endl;
+			file.close();
+			truth = false;
+			break;
+		default:
+			break;
 		}
-		file.close();
 	}
 }
+
 bool loopmovement(int choice)
 {
 	printActiveSeeStory();
