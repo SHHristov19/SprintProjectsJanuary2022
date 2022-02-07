@@ -434,7 +434,7 @@ void inputDataInFile()
 					getline(cin, sign);
 					if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 					{
-						cout << endl << "Which data do you want to change?  [title/year/place/latitude/description] " << endl;
+						cout << endl << "Which data do you want to change?  [title/year/place/latitude/longitude/description] " << endl;
 						getline(cin, sign);
 						cout << endl;
 						if (sign == "title" || sign == "Title")
@@ -571,6 +571,26 @@ void readDataFromFile()
 		output.close();
 	}
 	printList(data);
+}
+
+bool searchTitle(NODE* head, string find)
+{
+	NODE* temp = head->next;
+	while (temp != NULL)
+	{
+		if (temp->title == find)
+		{
+			cout << endl << "\x1b[1;33m" << "Title : " << temp->title << "\x1b[1;37m" << endl;
+			cout << "Year : " << temp->year << endl;
+			cout << "Place : " << temp->place << endl;
+			cout << "Latitude : " << temp->latitude << endl;
+			cout << "Longitude : " << temp->longitude << endl;
+			cout << "Description : " << temp->description << endl;
+			return true;
+		}
+		temp = temp->next;
+	}
+	return false;
 }
 
 bool loopmovement(int choice)
