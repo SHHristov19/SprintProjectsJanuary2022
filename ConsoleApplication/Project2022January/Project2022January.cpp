@@ -593,6 +593,26 @@ bool searchTitle(NODE* head, string find)
 	return false;
 }
 
+bool searchYear(NODE* head, string find)
+{
+	NODE* temp = head->next;
+	while (temp != NULL)
+	{
+		if (temp->year == find)
+		{
+			cout << endl << "Title : " << temp->title << endl;
+			cout << "\x1b[1;33m" << "Year : " << temp->year << "\x1b[1;37m" << endl;
+			cout << "Place : " << temp->place << endl;
+			cout << "Latitude : " << temp->latitude << endl;
+			cout << "Longitude : " << temp->longitude << endl;
+			cout << "Description : " << temp->description << endl;
+			return true;
+		}
+		temp = temp->next;
+	}
+	return false;
+}
+
 bool loopmovement(int choice)
 {
 	printActiveSeeStory();
