@@ -633,6 +633,92 @@ bool searchPlace(NODE* head, string find)
 	return false;
 }
 
+void SearchData()
+{
+	NODE* data = new NODE;
+	ifstream output("Data.csv", ios_base::app);
+	string title, year, place, latitude, longitude, description;
+	int counter = 0;
+	string sign, enter;
+	string str;
+	int firstRow = 0;
+	if (!output.is_open())
+	{
+		cout << "Error opening file";
+	}
+	else
+	{
+		while (!output.eof())
+		{
+			getline(output, str);
+			if (firstRow > 0 && str != "")
+			{
+				counter = 0;
+				title = year = place = latitude = longitude = description = "";
+				for (size_t i = 0; i < str.size(); i++)
+				{
+					if (str[i] == ',')
+					{
+						counter++;
+						str.erase(i, 0);
+					}
+					else if (counter == 0)
+					{
+						title += str[i];
+					}
+					else if (counter == 1)
+					{
+						year += str[i];
+					}
+					else if (counter == 2)
+					{
+						place += str[i];
+					}
+					else if (counter == 3)
+					{
+						latitude += str[i];
+					}
+					else if (counter == 4)
+					{
+						longitude += str[i];
+					}
+					else if (counter == 5)
+					{
+						description += str[i];
+					}
+
+				}
+				addNode(data, title, year, place, latitude, longitude, description);
+			}
+			firstRow++;
+		}
+		output.close();
+	}
+	cout << "By which data do you want to search? [title / year / place]" << endl;
+	getline(cin, sign);
+	if (sign == "title" || sign == "Title")
+	{
+		system("CLS");
+		cout << "Enter what you want to search : ";
+		getline(cin, enter);
+		searchTitle(data, enter);
+	}
+	else if (sign == "year" || sign == "Year")
+	{
+		system("CLS");
+		cout << "Enter what you want to search : ";
+		getline(cin, enter);
+		searchYear(data, enter);
+	}
+	else if (sign == "place" || sign == "Place")
+	{
+		system("CLS");
+		cout << "Enter what you want to search : ";
+		getline(cin, enter);
+		searchPlace(data, enter);
+	}
+}
+
 bool loopmovement(int choice)
 {
 	printActiveSeeStory();
@@ -734,6 +820,7 @@ bool loopmovement(int choice)
 			if (choice == 3)
 			{
 				system("CLS");
+				SearchData();
 				choice = 7;
 				writeBackWhite();
 				break;
