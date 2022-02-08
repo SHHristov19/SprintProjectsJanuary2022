@@ -387,9 +387,12 @@ void cinTitle(string* title, bool dataAddCorrectly)
 void cinYear(string* year, bool dataAddCorrectly)
 {
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the year of the History event : ";
 	getline(cin, *year);
 	check(dataAddCorrectly, *year);
+	dataAddCorrectly = false;
+	checkDigit(dataAddCorrectly, *year);
 	dataAddCorrectly = false;
 }
 
@@ -405,18 +408,24 @@ void cinPlace(string* place, bool dataAddCorrectly)
 void cinLatitude(string* latitude, bool dataAddCorrectly)
 {
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the latitude of this place : ";
 	getline(cin, *latitude);
 	check(dataAddCorrectly, *latitude);
+	dataAddCorrectly = false;
+	checkDigit(dataAddCorrectly, *latitude);
 	dataAddCorrectly = false;
 }
 
 void cinLongitude(string* longitude, bool dataAddCorrectly)
 {
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the longitude of this place : ";
 	getline(cin, *longitude);
 	check(dataAddCorrectly, *longitude);
+	dataAddCorrectly = false;
+	checkDigit(dataAddCorrectly, *longitude);
 	dataAddCorrectly = false;
 }
 
