@@ -523,9 +523,11 @@ void inputDataInFile()
 void readDataFromFile()
 {
 	NODE* data = new NODE;
+	NODE* temp = new NODE;
 	ifstream output("Data.csv", ios_base::app);
-	string title, year, place, latitude, longitude, description;
+	string title, year, greyCode, place, latitude, longitude, description;
 	int counter = 0;
+	string sign;
 	string str;
 	int firstRow = 0;
 	if (!output.is_open())
@@ -540,7 +542,7 @@ void readDataFromFile()
 			if (firstRow > 0 && str != "")
 			{
 				counter = 0;
-				title = year = place = latitude = longitude = description = "";
+				title = year = greyCode = place = latitude = longitude = description = "";
 				for (size_t i = 0; i < str.size(); i++)
 				{
 					if (str[i] == ',')
@@ -558,29 +560,37 @@ void readDataFromFile()
 					}
 					else if (counter == 2)
 					{
-						place += str[i];
+						greyCode += str[i];
 					}
 					else if (counter == 3)
 					{
-						latitude += str[i];
+						place += str[i];
 					}
 					else if (counter == 4)
 					{
-						longitude += str[i];
+						latitude += str[i];
 					}
 					else if (counter == 5)
 					{
+						longitude += str[i];
+					}
+					else if (counter == 6)
+					{
 						description += str[i];
 					}
-
 				}
-				//addNode(data, title, year, place, latitude, longitude, description);
+				addNode(data, title, year, stoi(greyCode), place, latitude, longitude, description);
 			}
 			firstRow++;
 		}
 		output.close();
 	}
-	printList(data);
+	cout << "Do you want to see all data? [Y/N]" << endl;
+	getline(cin, sign);
+	if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+	{
+		printList(data);
+	}
 }
 
 bool searchTitle(NODE* head, string find)
