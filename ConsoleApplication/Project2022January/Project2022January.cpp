@@ -23,6 +23,7 @@ struct NODE
 {
 	string title;
 	string year;
+	int greyCode = 0;
 	string place;
 	string latitude;
 	string longitude;
@@ -237,11 +238,12 @@ void printActiveExit()
 	activeExit();
 }
 
-void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription)
+void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeDataGreyCode, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription)
 {
 	NODE* newNode = new NODE;
 	newNode->title = nodeDataTitle;
 	newNode->year = nodeDataYear;
+	newNode->greyCode = nodeDataGreyCode;
 	newNode->place = nodeDataPlace;
 	newNode->latitude = nodeDataLatitude;
 	newNode->longitude = nodeDataLongitude;
@@ -257,6 +259,11 @@ void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, string nodeD
 		}
 		temp = temp->next;
 	}
+}
+
+int decToGrayCode(int number)
+{
+	return number ^ (number >> 1);
 }
 
 void deleteTtitle(NODE* head, string nodeDataTitle)
@@ -314,6 +321,7 @@ void printList(NODE* head)
 		while (temp != NULL) {
 			cout << endl << "Title : " << temp->title << endl;
 			cout << "Year : " << temp->year << endl;
+			cout << "Grey code of the year : " << temp->greyCode << endl;
 			cout << "Place : " << temp->place << endl;
 			cout << "Latitude : " << temp->latitude << endl;
 			cout << "Longitude : " << temp->longitude << endl;
@@ -406,9 +414,9 @@ void inputDataInFile()
 	NODE* data = new NODE;
 	string title, year, place, latitude, longitude, description;
 	bool dataAddCorrectly = false, truth = true, question;
-	int choice = 1;
+	int greyCode, choice = 1;
 	string sign;
-	ofstream file("Data.csv", ios_base::app);
+	ofstream file(".csv", ios_base::app);
 	while (truth)
 	{
 		switch (choice)
@@ -416,11 +424,12 @@ void inputDataInFile()
 		case 1:
 			cinTitle(&title, dataAddCorrectly);
 			cinYear(&year, dataAddCorrectly);
+			greyCode = decToGrayCode(stoi(year));
 			cinPlace(&place, dataAddCorrectly);
 			cinLatitude(&latitude, dataAddCorrectly);
 			cinLongitude(&longitude, dataAddCorrectly);
 			cinDescription(&description, dataAddCorrectly);
-			addNode(data, title, year, place, latitude, longitude, description);
+			addNode(data, title, year, greyCode, place, latitude, longitude, description);
 			system("CLS");
 			cout << "Do you want to see what you add? [Y/N]" << endl;
 			getline(cin, sign);
@@ -434,7 +443,7 @@ void inputDataInFile()
 					getline(cin, sign);
 					if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 					{
-						cout << endl << "Which data do you want to change?  [title/year/place/latitude/longitude/description] " << endl;
+						cout << endl << "Which data do you want to change?  [title/year/place/latitude/description] " << endl;
 						getline(cin, sign);
 						cout << endl;
 						if (sign == "title" || sign == "Title")
@@ -445,6 +454,7 @@ void inputDataInFile()
 						else if (sign == "year" || sign == "Year")
 						{
 							cinYear(&year, dataAddCorrectly);
+							greyCode = decToGrayCode(stoi(year));
 							deleteYear(data, year);
 						}
 						else if (sign == "place" || sign == "Place")
@@ -471,7 +481,7 @@ void inputDataInFile()
 						getline(cin, sign);
 						if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 						{
-							addNode(data, title, year, place, latitude, longitude, description);
+							addNode(data, title, year, greyCode, place, latitude, longitude, description);
 							printList(data);
 						}
 					}
@@ -482,7 +492,7 @@ void inputDataInFile()
 				}
 			}
 
-			file << title << "," << year << "," << place << "," << latitude << "," << longitude << "," << description << endl;
+			file << title << "," << year << "," << greyCode << "," << place << "," << latitude << "," << longitude << "," << description << endl;
 
 			system("CLS");
 			cout << "Do you want to add another data? [Y/N]" << endl;
@@ -564,7 +574,7 @@ void readDataFromFile()
 					}
 
 				}
-				addNode(data, title, year, place, latitude, longitude, description);
+				//addNode(data, title, year, place, latitude, longitude, description);
 			}
 			firstRow++;
 		}
@@ -688,7 +698,7 @@ void SearchData()
 					}
 
 				}
-				addNode(data, title, year, place, latitude, longitude, description);
+				//addNode(data, title, year, place, latitude, longitude, description);
 			}
 			firstRow++;
 		}
