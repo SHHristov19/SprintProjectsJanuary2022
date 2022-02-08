@@ -355,6 +355,26 @@ void check(bool dataAddCorrectly, string& data)
 	}
 }
 
+void checkDigit(bool dataAddCorrectly, string& data)
+{
+	string check = data;
+	while (dataAddCorrectly == false)
+	{
+		if (check.find_first_not_of("0123456789.") != string::npos)
+		{
+			system("CLS");
+			cout << "\x1b[1;31m" << "  !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m";
+			getline(cin, check);
+			data = check;
+		}
+		else
+		{
+			dataAddCorrectly = true;
+			system("CLS");
+		}
+	}
+}
+
 void cinTitle(string* title, bool dataAddCorrectly)
 {
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
