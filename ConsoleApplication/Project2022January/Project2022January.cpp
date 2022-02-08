@@ -592,6 +592,7 @@ bool searchTitle(NODE* head, string find)
 		{
 			cout << endl << "\x1b[1;33m" << "Title : " << temp->title << "\x1b[1;37m" << endl;
 			cout << "Year : " << temp->year << endl;
+			cout << "Grey code of the year : " << temp->greyCode << endl;
 			cout << "Place : " << temp->place << endl;
 			cout << "Latitude : " << temp->latitude << endl;
 			cout << "Longitude : " << temp->longitude << endl;
@@ -612,6 +613,7 @@ bool searchYear(NODE* head, string find)
 		{
 			cout << endl << "Title : " << temp->title << endl;
 			cout << "\x1b[1;33m" << "Year : " << temp->year << "\x1b[1;37m" << endl;
+			cout << "Grey code of the year : " << temp->greyCode << endl;
 			cout << "Place : " << temp->place << endl;
 			cout << "Latitude : " << temp->latitude << endl;
 			cout << "Longitude : " << temp->longitude << endl;
@@ -632,6 +634,7 @@ bool searchPlace(NODE* head, string find)
 		{
 			cout << endl << "Title : " << temp->title << endl;
 			cout << "Year : " << temp->year << endl;
+			cout << "Grey code of the year : " << temp->greyCode << endl;
 			cout << "\x1b[1;33m" << "Place : " << temp->place << "\x1b[1;37m" << endl;
 			cout << "Latitude : " << temp->latitude << endl;
 			cout << "Longitude : " << temp->longitude << endl;
@@ -647,7 +650,7 @@ void SearchData()
 {
 	NODE* data = new NODE;
 	ifstream output("Data.csv", ios_base::app);
-	string title, year, place, latitude, longitude, description;
+	string title, year, greyCode, place, latitude, longitude, description;
 	int counter = 0;
 	string sign, enter;
 	string str;
@@ -664,7 +667,7 @@ void SearchData()
 			if (firstRow > 0 && str != "")
 			{
 				counter = 0;
-				title = year = place = latitude = longitude = description = "";
+				title = year = greyCode = place = latitude = longitude = description = "";
 				for (size_t i = 0; i < str.size(); i++)
 				{
 					if (str[i] == ',')
@@ -682,23 +685,26 @@ void SearchData()
 					}
 					else if (counter == 2)
 					{
-						place += str[i];
+						greyCode += str[i];
 					}
 					else if (counter == 3)
 					{
-						latitude += str[i];
+						place += str[i];
 					}
 					else if (counter == 4)
 					{
-						longitude += str[i];
+						latitude += str[i];
 					}
 					else if (counter == 5)
 					{
+						longitude += str[i];
+					}
+					else if (counter == 6)
+					{
 						description += str[i];
 					}
-
 				}
-				//addNode(data, title, year, place, latitude, longitude, description);
+				addNode(data, title, year, stoi(greyCode), place, latitude, longitude, description);
 			}
 			firstRow++;
 		}
