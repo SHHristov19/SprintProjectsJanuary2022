@@ -317,6 +317,26 @@ void addUsers(FORM* head, string newusername, string newPassword)
 	}
 }
 
+void signUp()
+{
+	FORM* data = new FORM;
+	string username, password;
+	string sign;
+	ofstream fileUser("Users.txt", ios_base::app);
+	cout << "          ___ _             _   _      " << endl;
+	cout << "         / __(_)__ _ _ _   | | | |_ __ " << endl;
+	cout << "         \\__ \\ / _` | ' \\  | |_| | '_ \\" << endl;
+	cout << "         |___/_\\__, |_||_|  \\___/| .__/" << endl;
+	cout << "               |___/             |_|   " << endl << endl << endl;
+	cout << "      Enter user name : ";
+	getline(cin, username);
+	cout << endl << endl << "      Enter your password : ";
+	getline(cin, password);
+	fileUser << username << " " << password << endl;
+	fileUser.close();
+	addUsers(data, username, password);
+}
+
 int decToGrayCode(int number)
 {
 	return number ^ (number >> 1);
