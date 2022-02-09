@@ -33,33 +33,12 @@ struct NODE
 
 void activeSeeStory()
 {
-	cout << endl << endl << endl << endl << endl << endl;
-	cout << "\x1b[0;33m" << "                                    _____ / \\ ========================================================== / \\ _____" << endl;
-	cout << "                                   /     [   ]                                                          [   ]     \\" << endl;
-	cout << "                                  {      [   ]                                                          [   ]      }" << endl;
-	cout << "                                   \\_____[   ]                                                          [   ]_____/" << endl;
-	cout << "                                          \\ / ========================================================== \\ /" << "\x1b[1;37m" << endl;
-	cout << "                                             \\                                                          /  " << endl;
-	cout << "                                              |                                                        |  " << endl;
-	cout << "                                              |             __             _            _               |" << endl;
-	cout << "                                              |            / /  ___   ___ | | __   __ _| |_             |" << endl;
-	cout << "                                              |           / /  / _ \\ / _ \\| |/ /  / _` | __|           |" << endl;
-	cout << "                                               |         / /__| (_) | (_) |   <  | (_| | |_            \\" << endl;
-	cout << "                                               /         \\____/\\___/ \\___/|_|\\_\\  \\__,_|\\__|           |" << endl;
-	cout << "                                              |                   _     _                              |" << endl;
-	cout << "                                              |             /\\  /(_)___| |_ ___  _ __ _   _           /" << endl;
-	cout << "                                             |             / /_/ / / __| __/ _ \\| '__| | | |          \\" << endl;
-	cout << "                                              \\           / __  /| \\__ \\ || (_) | |  | |_| |           |" << endl;
-	cout << "                                              /           \\/ /_/ |_|___/\\__\\___/|_|   \\__, |           |" << endl;
-	cout << "                                              |                                       |___/           | " << endl;
-	cout << "                                              |                                                       |" << endl;
-	cout << "                                               |                                                     /   " << endl;
 	cout << "                                              |                                                      \\ " << endl;
 	cout << "                                               \\                  " << "\x1b[1;33m" << "-> See Story" << "\x1b[1;37m" << "                        | " << endl;
 	cout << "                                                |                                                    /" << endl;
 }
 
-void writeSeeStory()
+void activeSignIn()
 {
 	cout << endl << endl << endl << endl << endl << endl;
 	cout << "\x1b[0;33m" << "                                    _____ / \\ ========================================================== / \\ _____" << endl;
@@ -81,7 +60,42 @@ void writeSeeStory()
 	cout << "                                              /           \\/ /_/ |_|___/\\__\\___/|_|   \\__, |           |" << endl;
 	cout << "                                              |                                       |___/           | " << endl;
 	cout << "                                              |                                                       |" << endl;
-	cout << "                                               |                                                     /   " << endl;
+	cout << "                                              |                                                     /" << endl;
+	cout << "                                              /                                                     \\" << endl;
+	cout << "                                              |                  " << "\x1b[1;33m" << "-> Sign In" << "\x1b[1;37m" << "                          |" << endl;
+	cout << "                                              \\                                                      /   " << endl;
+}
+
+void writeSignIn()
+{
+	cout << endl << endl << endl << endl << endl << endl;
+	cout << "\x1b[0;33m" << "                                    _____ / \\ ========================================================== / \\ _____" << endl;
+	cout << "                                   /     [   ]                                                          [   ]     \\" << endl;
+	cout << "                                  {      [   ]                                                          [   ]      }" << endl;
+	cout << "                                   \\_____[   ]                                                          [   ]_____/" << endl;
+	cout << "                                          \\ / ========================================================== \\ /" << "\x1b[1;37m" << endl;
+	cout << "                                             \\                                                          /  " << endl;
+	cout << "                                              |                                                        |  " << endl;
+	cout << "                                              |             __             _            _               |" << endl;
+	cout << "                                              |            / /  ___   ___ | | __   __ _| |_             |" << endl;
+	cout << "                                              |           / /  / _ \\ / _ \\| |/ /  / _` | __|           |" << endl;
+	cout << "                                               |         / /__| (_) | (_) |   <  | (_| | |_            \\" << endl;
+	cout << "                                               /         \\____/\\___/ \\___/|_|\\_\\  \\__,_|\\__|           |" << endl;
+	cout << "                                              |                   _     _                              |" << endl;
+	cout << "                                              |             /\\  /(_)___| |_ ___  _ __ _   _           /" << endl;
+	cout << "                                             |             / /_/ / / __| __/ _ \\| '__| | | |          \\" << endl;
+	cout << "                                              \\           / __  /| \\__ \\ || (_) | |  | |_| |           |" << endl;
+	cout << "                                              /           \\/ /_/ |_|___/\\__\\___/|_|   \\__, |           |" << endl;
+	cout << "                                              |                                       |___/           | " << endl;
+	cout << "                                              |                                                       |" << endl;
+	cout << "                                              |                                                     /" << endl;
+	cout << "                                              /                                                     \\" << endl;
+	cout << "                                              |                    Sign In                           |" << endl;
+	cout << "                                              \\                                                      /   " << endl;
+}
+
+void writeSeeStory()
+{
 	cout << "                                              |                                                      \\ " << endl;
 	cout << "                                               \\                   See Story                          | " << endl;
 	cout << "                                                |                                                    /" << endl;
@@ -178,8 +192,20 @@ void writeBackWhite()
 	cout << "<- Back" << endl;
 }
 
+void printActiveSignIn()
+{
+	activeSignIn();
+	writeSeeStory();
+	writeAddStory();
+	writeSearch();
+	writeHowItWorks();
+	writeAboutUs();
+	writeExit();
+}
+
 void printActiveSeeStory()
 {
+	writeSignIn();
 	activeSeeStory();
 	writeAddStory();
 	writeSearch();
@@ -190,6 +216,7 @@ void printActiveSeeStory()
 
 void printActiveAddStory()
 {
+	writeSignIn();
 	writeSeeStory();
 	activeAddStory();
 	writeSearch();
@@ -200,6 +227,7 @@ void printActiveAddStory()
 
 void printActiveSearch()
 {
+	writeSignIn();
 	writeSeeStory();
 	writeAddStory();
 	activeSearch();
@@ -210,6 +238,7 @@ void printActiveSearch()
 
 void printActiveHowItWorks()
 {
+	writeSignIn();
 	writeSeeStory();
 	writeAddStory();
 	writeSearch();
@@ -220,6 +249,7 @@ void printActiveHowItWorks()
 
 void printActiveAboutUs()
 {
+	writeSignIn();
 	writeSeeStory();
 	writeAddStory();
 	writeSearch();
@@ -230,6 +260,7 @@ void printActiveAboutUs()
 
 void printActiveExit()
 {
+	writeSignIn();
 	writeSeeStory();
 	writeAddStory();
 	writeSearch();
@@ -776,7 +807,7 @@ void SearchData()
 
 bool loopmovement(int choice)
 {
-	printActiveSeeStory();
+	printActiveSignIn();
 	choice = 1;
 	while (true) {
 		switch (_getch()) {
@@ -784,36 +815,43 @@ bool loopmovement(int choice)
 			if (choice == 2)
 			{
 				system("CLS");
-				printActiveSeeStory();
+				printActiveSignIn();
 				choice = 1;
 				break;
 			}
 			if (choice == 3)
 			{
 				system("CLS");
-				printActiveAddStory();
+				printActiveSeeStory();
 				choice = 2;
 				break;
 			}
 			if (choice == 4)
 			{
 				system("CLS");
-				printActiveSearch();
+				printActiveAddStory();
 				choice = 3;
 				break;
 			}
 			if (choice == 5)
 			{
 				system("CLS");
-				printActiveHowItWorks();
+				printActiveSearch();
 				choice = 4;
 				break;
 			}
 			if (choice == 6)
 			{
 				system("CLS");
-				printActiveAboutUs();
+				printActiveHowItWorks();
 				choice = 5;
+				break;
+			}
+			if (choice == 7)
+			{
+				system("CLS");
+				printActiveAboutUs();
+				choice = 6;
 				break;
 			}
 			break;
@@ -821,36 +859,43 @@ bool loopmovement(int choice)
 			if (choice == 1)
 			{
 				system("CLS");
-				printActiveAddStory();
+				printActiveSeeStory();
 				choice = 2;
 				break;
 			}
 			if (choice == 2)
 			{
 				system("CLS");
-				printActiveSearch();
+				printActiveAddStory();
 				choice = 3;
 				break;
 			}
 			if (choice == 3)
 			{
 				system("CLS");
-				printActiveHowItWorks();
+				printActiveSearch();
 				choice = 4;
 				break;
 			}
 			if (choice == 4)
 			{
 				system("CLS");
-				printActiveAboutUs();
+				printActiveHowItWorks();
 				choice = 5;
 				break;
 			}
 			if (choice == 5)
 			{
 				system("CLS");
-				printActiveExit();
+				printActiveAboutUs();
 				choice = 6;
+				break;
+			}
+			if (choice == 6)
+			{
+				system("CLS");
+				printActiveExit();
+				choice = 7;
 				break;
 			}
 			break;
@@ -858,51 +903,59 @@ bool loopmovement(int choice)
 			if (choice == 1)
 			{
 				system("CLS");
-				readDataFromFile();
-				choice = 7;
 				writeBackWhite();
+				choice = 8;
 				break;
 
 			}
 			if (choice == 2)
 			{
 				system("CLS");
-				inputDataInFile();
-				choice = 7;
+				readDataFromFile();
+				choice = 8;
 				writeBackWhite();
 				break;
+
 			}
 			if (choice == 3)
 			{
 				system("CLS");
-				SearchData();
-				choice = 7;
+				inputDataInFile();
+				choice = 8;
 				writeBackWhite();
 				break;
 			}
 			if (choice == 4)
 			{
 				system("CLS");
-				choice = 7;
+				SearchData();
+				choice = 8;
 				writeBackWhite();
 				break;
 			}
 			if (choice == 5)
 			{
 				system("CLS");
+				choice = 8;
 				writeBackWhite();
-				choice = 7;
 				break;
 			}
 			if (choice == 6)
 			{
-				return 0;
+				system("CLS");
+				writeBackWhite();
+				choice = 8;
 				break;
 			}
 			if (choice == 7)
 			{
+				return 0;
+				break;
+			}
+			if (choice == 8)
+			{
 				system("CLS");
-				printActiveSeeStory();
+				printActiveSignIn();
 				choice = 1;
 				break;
 			}
