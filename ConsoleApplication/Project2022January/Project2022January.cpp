@@ -31,6 +31,13 @@ struct NODE
 	NODE* next = NULL;
 };
 
+struct FORM
+{
+	string username;
+	string password;
+	FORM* next = NULL;
+};
+
 void activeSeeStory()
 {
 	cout << "                                              |                                                      \\ " << endl;
@@ -281,6 +288,24 @@ void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeData
 	newNode->description = nodeDataDescription;
 	newNode->next = NULL;
 	NODE* temp = head;
+	while (temp)
+	{
+		if (temp->next == NULL)
+		{
+			temp->next = newNode;
+			return;
+		}
+		temp = temp->next;
+	}
+}
+
+void addUsers(FORM* head, string newusername, string newPassword)
+{
+	FORM* newNode = new FORM;
+	newNode->username = newusername;
+	newNode->password = newPassword;
+	newNode->next = NULL;
+	FORM* temp = head;
 	while (temp)
 	{
 		if (temp->next == NULL)
