@@ -322,7 +322,7 @@ void signUp()
 	FORM* data = new FORM;
 	string username, password;
 	string sign;
-	ofstream fileUser("Users.txt", ios_base::app);
+	ofstream fileUser("UsersData.txt", ios_base::app);
 	cout << "          ___ _             _   _      " << endl;
 	cout << "         / __(_)__ _ _ _   | | | |_ __ " << endl;
 	cout << "         \\__ \\ / _` | ' \\  | |_| | '_ \\" << endl;
@@ -335,6 +335,109 @@ void signUp()
 	fileUser << username << " " << password << endl;
 	fileUser.close();
 	addUsers(data, username, password);
+}
+
+bool chechProfile()
+{
+	string sign;
+	cout << "Do you have a profile? [Y/N]    ";
+	getline(cin, sign);
+	if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+	{
+		system("CLS");
+		return true;
+	}
+	return false;
+}
+
+bool searchUsers(FORM* head, string findUser, string findPassword, bool successfullySignIn)
+{
+	FORM* temp = head;
+	while (temp != NULL)
+	{
+		if (temp->username == findUser && temp->password == findPassword)
+		{
+			system("CLS");
+			cout << "You Sign In sucsesfully!";
+			successfullySignIn = true;
+			return true;
+		}
+		temp = temp->next;
+	}
+	return false;
+}
+
+bool signIn()
+{
+	bool successfullySignIn = false;
+	FORM* data = new FORM;
+	ifstream output("UsersData.txt", ios_base::app);
+	string username, password;
+	int counter = 0;
+	string sign;
+	string str;
+	int firstRow = 0;
+	if (chechProfile())
+	{
+
+
+		while (!output.eof())
+		{
+			getline(output, str);
+			counter = 0;
+			username = password = "";
+			for (size_t i = 0; i < str.size(); i++)
+			{
+				if (str[i] == ' ')
+				{
+					counter++;
+					str.erase(i, 0);
+				}
+				else if (counter == 0)
+				{
+					username += str[i];
+				}
+				else if (counter == 1)
+				{
+					password += str[i];
+				}
+			}
+			addUsers(data, username, password);
+
+		}
+		output.close();
+		cout << "          ___ _             ___      " << endl;
+		cout << "         / __(_)__ _ _ _   |_ _|_ _  " << endl;
+		cout << "         \\__ \\ / _` | ' \\   | || ' \\ " << endl;
+		cout << "         |___/_\\__, |_||_| |___|_||_|" << endl;
+		cout << "               |___/     " << endl << endl << endl;
+		cout << "      Enter user name : ";
+		getline(cin, username);
+		cout << endl << endl << "      Enter your password : ";
+		getline(cin, password);
+		if (searchUsers(data, username, password, successfullySignIn) == false)
+		{
+			system("CLS");
+			cout << "Your username or password is invalid" << endl;
+			cout << "Do you want to sign up[Y/N]";
+			sign = "";
+			getline(cin, sign);
+			if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+			{
+				system("CLS");
+				signUp();
+			}
+		}
+		else if (searchUsers(data, username, password, successfullySignIn) == true)
+		{
+			return successfullySignIn;
+		}
+	}
+	else
+	{
+		system("CLS");
+		signUp();
+	}
 }
 
 int decToGrayCode(int number)
@@ -948,10 +1051,10 @@ bool loopmovement(int choice)
 			if (choice == 1)
 			{
 				system("CLS");
+				signIn();
 				writeBackWhite();
 				choice = 8;
 				break;
-
 			}
 			if (choice == 2)
 			{
@@ -960,7 +1063,6 @@ bool loopmovement(int choice)
 				choice = 8;
 				writeBackWhite();
 				break;
-
 			}
 			if (choice == 3)
 			{
@@ -1010,6 +1112,8 @@ bool loopmovement(int choice)
 		}
 	}
 }
+
+
 int main()
 {
 	int choice = 1;
