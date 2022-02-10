@@ -303,7 +303,14 @@ void printTitleAddStory()
 	cout << " /_/ \\_\\__,_\\__,_| |___/\\__\\___/_| \\_, |" << endl;
 	cout << " |__/ " << "\x1b[1;37m" << endl << endl << endl << endl;
 }
-
+void printTitleSeeStory()
+{
+	cout << "\x1b[1;33m" << " ___ ___ _ " << endl;
+	cout << " / __| ___ ___ / __| |_ ___ _ _ _ _ " << endl;
+	cout << " \\__ \\/ -_) -_) \\__ \\ _/ _ \\ '_| || |" << endl;
+	cout << " |___/\\___\\___| |___/\\__\\___/_| \\_, |" << endl;
+	cout << " |__/ " << "\x1b[1;37m" << endl << endl << endl << endl;
+}
 
 void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeDataGreyCode, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription)
 {
