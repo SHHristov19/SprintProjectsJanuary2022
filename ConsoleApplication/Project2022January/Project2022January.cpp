@@ -288,6 +288,15 @@ void printAboutUs()
 	cout << "       Zlatomir Kostadinov - QA" << endl;
 	cout << "       Todor Zafirov - Scrum Trainer" << endl;
 }
+void printTitleHowItWors()
+{
+	cout << "\x1b[1;33m" << " _ _ ___ _ _" << endl;
+	cout << " | || |_____ __ __ |_ _| |_ __ __ _____ _ _| |__ ___" << endl;
+	cout << " | __ / _ \ V V / | || _| \\ V V / _ \\ '_| / /(_-<" << endl;
+	cout << " |_||_\\___/\\_/\\_/ |___|\\__| \\_/\\_/\\___/_| |_\\_\\/__/" << "\x1b[1;37m" << endl << endl << endl << endl;
+}
+
+
 
 void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeDataGreyCode, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription)
 {
