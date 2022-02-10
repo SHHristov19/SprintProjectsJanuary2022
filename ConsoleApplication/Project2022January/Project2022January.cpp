@@ -275,6 +275,19 @@ void printActiveExit()
 	writeAboutUs();
 	activeExit();
 }
+void printAboutUs()
+{
+	cout << "\x1b[1;33m" << "                         _   _              _     _   _    " << endl;
+	cout << "                        /_\\ | |__  ___ _  _| |_  | | | |___" << endl;
+	cout << "                       / _ \\| '_ \\/ _ \\ || |  _| | |_| (_-<" << endl;
+	cout << "                      /_/ \\_\\_.__/\\___/\\_,_|\\__|  \\___//__/" << "\x1b[1;37m" << endl;
+	cout << endl << endl << endl;
+	cout << "Our team is made of 4 people:" << endl;
+	cout << "       Stefan Hristov - Back End" << endl;
+	cout << "       Daniel Kolev - Front End" << endl;
+	cout << "       Zlatomir Kostadinov - QA" << endl;
+	cout << "       Todor Zafirov - Scrum Trainer" << endl;
+}
 
 void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeDataGreyCode, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription)
 {
@@ -1215,6 +1228,7 @@ bool loopmovement(int choice)
 			if (choice == 6 && successfullySignIn == true)
 			{
 				system("CLS");
+				printAboutUs();
 				writeBackWhite();
 				choice = 8;
 				break;
