@@ -350,7 +350,7 @@ bool chechProfile()
 	return false;
 }
 
-bool searchUsers(FORM* head, string findUser, string findPassword, bool successfullySignIn)
+bool searchUsers(FORM* head, string findUser, string findPassword)
 {
 	FORM* temp = head;
 	while (temp != NULL)
@@ -359,7 +359,6 @@ bool searchUsers(FORM* head, string findUser, string findPassword, bool successf
 		{
 			system("CLS");
 			cout << "You Sign In sucsesfully!";
-			successfullySignIn = true;
 			return true;
 		}
 		temp = temp->next;
@@ -367,9 +366,8 @@ bool searchUsers(FORM* head, string findUser, string findPassword, bool successf
 	return false;
 }
 
-bool signIn()
+void signIn(bool* successfullySignIn)
 {
-	bool successfullySignIn = false;
 	FORM* data = new FORM;
 	ifstream output("UsersData.txt", ios_base::app);
 	string username, password;
@@ -403,7 +401,6 @@ bool signIn()
 				}
 			}
 			addUsers(data, username, password);
-
 		}
 		output.close();
 		cout << "          ___ _             ___      " << endl;
@@ -415,7 +412,7 @@ bool signIn()
 		getline(cin, username);
 		cout << endl << endl << "      Enter your password : ";
 		getline(cin, password);
-		if (searchUsers(data, username, password, successfullySignIn) == false)
+		if (searchUsers(data, username, password) == false)
 		{
 			system("CLS");
 			cout << "Your username or password is invalid" << endl;
@@ -428,9 +425,9 @@ bool signIn()
 				signUp();
 			}
 		}
-		else if (searchUsers(data, username, password, successfullySignIn) == true)
+		else if (searchUsers(data, username, password) == true)
 		{
-			return successfullySignIn;
+			*successfullySignIn = true;
 		}
 	}
 	else
@@ -955,6 +952,7 @@ void SearchData()
 
 bool loopmovement(int choice)
 {
+	bool successfullySignIn = false;
 	printActiveSignIn();
 	choice = 1;
 	while (true) {
@@ -1051,12 +1049,12 @@ bool loopmovement(int choice)
 			if (choice == 1)
 			{
 				system("CLS");
-				signIn();
+				signIn(&successfullySignIn);
 				writeBackWhite();
 				choice = 8;
 				break;
 			}
-			if (choice == 2)
+			if (choice == 2 && successfullySignIn == true)
 			{
 				system("CLS");
 				readDataFromFile();
@@ -1064,7 +1062,7 @@ bool loopmovement(int choice)
 				writeBackWhite();
 				break;
 			}
-			if (choice == 3)
+			if (choice == 3 && successfullySignIn == true)
 			{
 				system("CLS");
 				inputDataInFile();
@@ -1072,7 +1070,7 @@ bool loopmovement(int choice)
 				writeBackWhite();
 				break;
 			}
-			if (choice == 4)
+			if (choice == 4 && successfullySignIn == true)
 			{
 				system("CLS");
 				SearchData();
@@ -1080,14 +1078,14 @@ bool loopmovement(int choice)
 				writeBackWhite();
 				break;
 			}
-			if (choice == 5)
+			if (choice == 5 && successfullySignIn == true)
 			{
 				system("CLS");
 				choice = 8;
 				writeBackWhite();
 				break;
 			}
-			if (choice == 6)
+			if (choice == 6 && successfullySignIn == true)
 			{
 				system("CLS");
 				writeBackWhite();
