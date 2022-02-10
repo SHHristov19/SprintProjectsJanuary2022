@@ -67,8 +67,8 @@ void activeSignIn()
 	cout << "                                              /           \\/ /_/ |_|___/\\__\\___/|_|   \\__, |           |" << endl;
 	cout << "                                              |                                       |___/           | " << endl;
 	cout << "                                              |                                                       |" << endl;
-	cout << "                                              |                                                     /" << endl;
-	cout << "                                              /                                                     \\" << endl;
+	cout << "                                              |                                                      /" << endl;
+	cout << "                                              /                                                      \\" << endl;
 	cout << "                                              |                  " << "\x1b[1;33m" << "-> Sign In" << "\x1b[1;37m" << "                          |" << endl;
 	cout << "                                              \\                                                      /   " << endl;
 }
@@ -95,8 +95,8 @@ void writeSignIn()
 	cout << "                                              /           \\/ /_/ |_|___/\\__\\___/|_|   \\__, |           |" << endl;
 	cout << "                                              |                                       |___/           | " << endl;
 	cout << "                                              |                                                       |" << endl;
-	cout << "                                              |                                                     /" << endl;
-	cout << "                                              /                                                     \\" << endl;
+	cout << "                                              |                                                      /" << endl;
+	cout << "                                              /                                                      \\" << endl;
 	cout << "                                              |                    Sign In                           |" << endl;
 	cout << "                                              \\                                                      /   " << endl;
 }
@@ -695,7 +695,7 @@ void inputDataInFile()
 	bool dataAddCorrectly = false, truth = true, question;
 	int greyCode, choice = 1;
 	string sign;
-	ofstream file(".csv", ios_base::app);
+	ofstream file("Data.csv", ios_base::app);
 	while (truth)
 	{
 		switch (choice)
@@ -799,79 +799,6 @@ void inputDataInFile()
 	}
 }
 
-void readDataFromFile()
-{
-	NODE* data = new NODE;
-	NODE* temp = new NODE;
-	ifstream output("Data.csv", ios_base::app);
-	string title, year, greyCode, place, latitude, longitude, description;
-	int counter = 0;
-	string sign;
-	string str;
-	int firstRow = 0;
-	if (!output.is_open())
-	{
-		cout << "Error opening file";
-	}
-	else
-	{
-		while (!output.eof())
-		{
-			getline(output, str);
-			if (firstRow > 0 && str != "")
-			{
-				counter = 0;
-				title = year = greyCode = place = latitude = longitude = description = "";
-				for (size_t i = 0; i < str.size(); i++)
-				{
-					if (str[i] == ',')
-					{
-						counter++;
-						str.erase(i, 0);
-					}
-					else if (counter == 0)
-					{
-						title += str[i];
-					}
-					else if (counter == 1)
-					{
-						year += str[i];
-					}
-					else if (counter == 2)
-					{
-						greyCode += str[i];
-					}
-					else if (counter == 3)
-					{
-						place += str[i];
-					}
-					else if (counter == 4)
-					{
-						latitude += str[i];
-					}
-					else if (counter == 5)
-					{
-						longitude += str[i];
-					}
-					else if (counter == 6)
-					{
-						description += str[i];
-					}
-				}
-				addNode(data, title, year, stoi(greyCode), place, latitude, longitude, description);
-			}
-			firstRow++;
-		}
-		output.close();
-	}
-	cout << "Do you want to see all data? [Y/N]" << endl;
-	getline(cin, sign);
-	if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
-	{
-		printList(data);
-	}
-}
-
 bool searchTitle(NODE* head, string find)
 {
 	NODE* temp = head->next;
@@ -895,7 +822,7 @@ bool searchTitle(NODE* head, string find)
 
 bool searchYear(NODE* head, string find)
 {
-	NODE* temp = head->next;
+	NODE* temp = head;
 	while (temp != NULL)
 	{
 		if (temp->year == find)
@@ -1021,6 +948,132 @@ void SearchData()
 		cout << "Enter what you want to search : ";
 		getline(cin, enter);
 		searchPlace(data, enter);
+	}
+}
+
+void sortList(NODE** head)
+{
+	NODE* temp = *head;
+	string tempNode, sign;
+	NODE* tempHead = new NODE;
+	NODE* tempNext = NULL;
+	head = &(*head)->next;
+	int swapped;
+	do
+	{
+		swapped = 0;
+		tempHead = *head;
+		while (tempHead->next != tempNext)
+		{
+			if (tempHead->year > tempHead->next->year)
+			{
+				tempNode = tempHead->year;
+				tempHead->year = tempHead->next->year;
+				tempHead->next->year = tempNode;
+				swapped = 1;
+			}
+			tempHead = tempHead->next;
+		}
+		tempNext = tempHead;
+
+	} while (swapped);
+
+
+}
+
+void printSortData(NODE** head, NODE** find)
+{
+	NODE** temp = &(*head)->next;
+	string findStr = "";
+	while (*find)
+	{
+		findStr = (*find)->year;
+		searchYear(*temp, findStr);
+		find = &(*find)->next;
+	}
+}
+
+void readDataFromFile()
+{
+	NODE* data = new NODE;
+	NODE* temp = new NODE;
+	ifstream output("Data.csv", ios_base::app);
+	string title, year, greyCode, place, latitude, longitude, description;
+	int counter = 0;
+	string sign;
+	string str;
+	int firstRow = 0;
+	if (!output.is_open())
+	{
+		cout << "Error opening file";
+	}
+	else
+	{
+		while (!output.eof())
+		{
+			getline(output, str);
+			if (firstRow > 0 && str != "")
+			{
+				counter = 0;
+				title = year = greyCode = place = latitude = longitude = description = "";
+				for (size_t i = 0; i < str.size(); i++)
+				{
+					if (str[i] == ',')
+					{
+						counter++;
+						str.erase(i, 0);
+					}
+					else if (counter == 0)
+					{
+						title += str[i];
+					}
+					else if (counter == 1)
+					{
+						year += str[i];
+					}
+					else if (counter == 2)
+					{
+						greyCode += str[i];
+					}
+					else if (counter == 3)
+					{
+						place += str[i];
+					}
+					else if (counter == 4)
+					{
+						latitude += str[i];
+					}
+					else if (counter == 5)
+					{
+						longitude += str[i];
+					}
+					else if (counter == 6)
+					{
+						description += str[i];
+					}
+				}
+				addNode(data, title, year, stoi(greyCode), place, latitude, longitude, description);
+				addNode(temp, title, year, stoi(greyCode), place, latitude, longitude, description);
+			}
+			firstRow++;
+		}
+		output.close();
+
+	}
+	cout << "Do you want to see all data? [Y/N]" << endl;
+	getline(cin, sign);
+	if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+	{
+		printList(data);
+		cout << "Do you want to sort data by year? [Y/N]" << endl;
+		getline(cin, sign);
+		if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
+		{
+			system("CLS");
+			sortList(&data);
+			printSortData(&temp, &data);
+		}
+
 	}
 }
 
