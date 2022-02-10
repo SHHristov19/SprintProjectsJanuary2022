@@ -317,6 +317,65 @@ void addUsers(FORM* head, string newusername, string newPassword)
 	}
 }
 
+bool checkPasswordForSpecialCharecter(char password[], int n)
+{
+	bool aUpper = false, aLower = false, aDigit = false, aChar = false;
+	char character[] = "!@#$%^&*()_+-=,.<>?/|:;";
+	for (int i = 0; i < n; i++)
+	{
+		if (isupper(password[i]))
+		{
+			aUpper = true;
+		}
+		else if (islower(password[i]))
+		{
+			aLower = true;
+		}
+		else if (isdigit(password[i]))
+		{
+			aDigit = true;
+		}
+		else
+		{
+			for (int i = 0; i < n; i++)
+			{
+				for (int j = 0; j < 23; j++)
+				{
+					if (character[j] == password[i])
+					{
+						aChar = true;
+					}
+				}
+			}
+		}
+	}
+	if (aUpper && aLower && aDigit && n >= 8 && n <= 20 && aChar)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool checkPassword(string str)
+{
+	char ch[20];
+	for (int i = 0; i < str.size(); i++)
+	{
+		ch[i] = str.at(i);
+	}
+	if (checkPasswordForSpecialCharecter(ch, size(str)))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void signUp()
 {
 	FORM* data = new FORM;
@@ -330,11 +389,26 @@ void signUp()
 	cout << "               |___/             |_|   " << endl << endl << endl;
 	cout << "      Enter user name : ";
 	getline(cin, username);
+	cout << endl << endl << "\x1b[1;31m" "The password must contain uppercase, lowercase letters and special characters. It must be not less than 8 and not more than 20 characters" << "\x1b[1;37m";
 	cout << endl << endl << "      Enter your password : ";
 	getline(cin, password);
-	fileUser << username << " " << password << endl;
-	fileUser.close();
-	addUsers(data, username, password);
+	if (checkPassword(password))
+	{
+		fileUser << username << " " << password << endl;
+		fileUser.close();
+		addUsers(data, username, password);
+		system("CLS");
+		cout << "Your account has been added correctly!" << endl << endl;
+	}
+	else
+	{
+		system("CLS");
+		cout << "\x1b[1;31m" "The password must contain uppercase, lowercase letters and special characters. It must be not less than 8 and not more than 20 characters" << "\x1b[1;37m" << endl << endl;
+		system("pause");
+		system("read -n 1 -p \"Press any key to continue . . .\"");
+		system("CLS");
+		signUp();
+	}
 }
 
 bool chechProfile()
