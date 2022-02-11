@@ -36,6 +36,8 @@ void printAboutUs();
 
 void printTitleHowItWorks();
 
+void printHowItWorks();
+
 void printTitleAddStory();
 
 void printTitleSeeStory();

@@ -179,28 +179,36 @@ void printAboutUs()
 
 void printTitleHowItWorks()
 {
-	cout << "\x1b[1;33m" << " _ _ ___ _ _" << endl;
-	cout << " | || |_____ __ __ |_ _| |_ __ __ _____ _ _| |__ ___" << endl;
-	cout << " | __ / _ \ V V / | || _| \\ V V / _ \\ '_| / /(_-<" << endl;
-	cout << " |_||_\\___/\\_/\\_/ |___|\\__| \\_/\\_/\\___/_| |_\\_\\/__/" << "\x1b[1;37m" << endl << endl << endl << endl;
+	cout << "\x1b[1;33m" << "                                     _  _              _ _                    _       " << endl;
+	cout << "                                    | || |_____ __ __ (_) |_  __ __ _____ _ _| |__ ___" << endl;
+	cout << "                                    | __ / _ \\ V  V / | |  _| \\ V  V / _ \\ '_| / /(_-<" << endl;
+	cout << "                                    |_||_\\___/\\_/\\_/  |_|\\__|  \\_/\\_/\\___/_| |_\\_\\/__/" << "\x1b[1;37m" << endl << endl << endl << endl; 
+}
+
+void printHowItWorks()
+{
+	cout << "                   1. You have to sign in in order to have access!" << endl;
+	cout << "                   2. The program is used to sort historical events by year that you can add and later on search them." << endl;
+	cout << "                   3. To add an event you have to click on Add story and input all the data." << endl;
+	cout << "                   4. Then you can see it or search it using See Story or Search story options." << endl;
 }
 
 void printTitleAddStory()
 {
-	cout << "\x1b[1;33m" << " _ _ _ ___ _ " << endl;
-	cout << " /_\\ __| |__| | / __| |_ ___ _ _ _ _ " << endl;
-	cout << " / _ \\/ _` / _` | \\__ \\ _/ _ \\ '_| || |" << endl;
-	cout << " /_/ \\_\\__,_\\__,_| |___/\\__\\___/_| \\_, |" << endl;
-	cout << " |__/ " << "\x1b[1;37m" << endl << endl << endl << endl;
+	cout << "\x1b[1;33m" << "                                       _      _    _   ___ _                " << endl;
+	cout << "                                      /_\\  __| |__| | / __| |_ ___ _ _ _  _ " << endl;
+	cout << "                                     / _ \\/ _` / _` | \\__ \\  _/ _ \\ '_| || |" << endl;
+	cout << "                                    /_/ \\_\\__,_\\__,_| |___/\\__\\___/_|  \\_, |" << endl;
+	cout << "                                                                       |__/ " << "\x1b[1;37m" << endl << endl << endl << endl;
 }
 
 void printTitleSeeStory()
 {
-	cout << "\x1b[1;33m" << " ___ ___ _ " << endl;
-	cout << " / __| ___ ___ / __| |_ ___ _ _ _ _ " << endl;
-	cout << " \\__ \\/ -_) -_) \\__ \\ _/ _ \\ '_| || |" << endl;
-	cout << " |___/\\___\\___| |___/\\__\\___/_| \\_, |" << endl;
-	cout << " |__/ " << "\x1b[1;37m" << endl << endl << endl << endl;
+	cout << "\x1b[1;33m" << "                                     ___            ___ _                " << endl;
+	cout << "                                    / __| ___ ___  / __| |_ ___ _ _ _  _ " << endl;
+	cout << "                                    \\__ \\/ -_) -_) \\__ \\  _/ _ \\ '_| || |" << endl;
+	cout << "                                    |___/\\___\\___| |___/\\__\\___/_|  \\_, |" << endl;
+	cout << "                                                                    |__/" << "\x1b[1;37m" << endl << endl << endl << endl;
 }
 
 void printActiveSignIn()

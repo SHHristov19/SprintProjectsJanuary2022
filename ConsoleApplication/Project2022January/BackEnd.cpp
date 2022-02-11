@@ -391,6 +391,7 @@ void checkDigit(bool dataAddCorrectly, string& data)
 
 void cinTitle(string* title, bool dataAddCorrectly)
 {
+	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the title of the History event : ";
 	getline(cin, *title);
@@ -400,6 +401,7 @@ void cinTitle(string* title, bool dataAddCorrectly)
 
 void cinYear(string* year, bool dataAddCorrectly)
 {
+	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the year of the History event : ";
@@ -412,6 +414,7 @@ void cinYear(string* year, bool dataAddCorrectly)
 
 void cinPlace(string* place, bool dataAddCorrectly)
 {
+	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter where exactly happened this event : ";
 	getline(cin, *place);
@@ -421,6 +424,7 @@ void cinPlace(string* place, bool dataAddCorrectly)
 
 void cinLatitude(string* latitude, bool dataAddCorrectly)
 {
+	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the latitude of this place : ";
@@ -433,6 +437,7 @@ void cinLatitude(string* latitude, bool dataAddCorrectly)
 
 void cinLongitude(string* longitude, bool dataAddCorrectly)
 {
+	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the longitude of this place : ";
@@ -445,6 +450,7 @@ void cinLongitude(string* longitude, bool dataAddCorrectly)
 
 void cinDescription(string* description, bool dataAddCorrectly)
 {
+	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter what's happened in this place : ";
 	getline(cin, *description);
@@ -474,6 +480,7 @@ void inputDataInFile()
 			cinDescription(&description, dataAddCorrectly);
 			addNode(data, title, year, greyCode, place, latitude, longitude, description);
 			system("CLS");
+			printTitleAddStory();
 			cout << "Do you want to see what you add? [Y/N]" << endl;
 			getline(cin, sign);
 			if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
@@ -538,6 +545,7 @@ void inputDataInFile()
 			file << title << "," << year << "," << greyCode << "," << place << "," << latitude << "," << longitude << "," << description << endl;
 
 			system("CLS");
+			printTitleAddStory();
 			cout << "Do you want to add another data? [Y/N]" << endl;
 			getline(cin, sign);
 			if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
@@ -832,6 +840,7 @@ void readDataFromFile()
 		output.close();
 
 	}
+	printTitleSeeStory();
 	cout << "Do you want to see all data? [Y/N]" << endl;
 	getline(cin, sign);
 	if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
@@ -842,6 +851,7 @@ void readDataFromFile()
 		if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 		{
 			system("CLS");
+			printTitleSeeStory();
 			sortList(&data);
 			printSortData(&temp, &data);
 		}
@@ -980,6 +990,8 @@ bool loopmovement(int choice)
 			if (choice == 5 && successfullySignIn == true)
 			{
 				system("CLS");
+				printTitleHowItWorks();
+				printHowItWorks();
 				choice = 8;
 				writeBackWhite();
 				break;
