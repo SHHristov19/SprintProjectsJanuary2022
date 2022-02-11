@@ -374,7 +374,7 @@ void checkDigit(bool dataAddCorrectly, string& data)
 	string check = data;
 	while (dataAddCorrectly == false)
 	{
-		if (check.find_first_not_of("0123456789.") != string::npos)
+		if (check.find_first_not_of("0123456789.-") != string::npos)
 		{
 			system("CLS");
 			cout << "\x1b[1;31m" << "  !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m";
@@ -650,9 +650,13 @@ void SearchData()
 				title = year = greyCode = place = latitude = longitude = description = "";
 				for (size_t i = 0; i < str.size(); i++)
 				{
-					if (str[i] == ',')
+					if (str[i] == ',' && counter < 6)
 					{
 						counter++;
+						str.erase(i, 0);
+					}
+					else if (str[i] == '"')
+					{
 						str.erase(i, 0);
 					}
 					else if (counter == 0)
@@ -729,7 +733,7 @@ void sortList(NODE** head)
 		tempHead = *head;
 		while (tempHead->next != tempNext)
 		{
-			if (tempHead->year > tempHead->next->year)
+			if (tempHead->year >= tempHead->next->year)
 			{
 				tempNode = tempHead->year;
 				tempHead->year = tempHead->next->year;
@@ -782,9 +786,13 @@ void readDataFromFile()
 				title = year = greyCode = place = latitude = longitude = description = "";
 				for (size_t i = 0; i < str.size(); i++)
 				{
-					if (str[i] == ',')
+					if (str[i] == ',' && counter < 6)
 					{
 						counter++;
+						str.erase(i, 0);
+					}
+					else if (str[i] == '"')
+					{
 						str.erase(i, 0);
 					}
 					else if (counter == 0)
