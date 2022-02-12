@@ -624,7 +624,7 @@ void inputDataInFile()
 						if (sign == "title" || sign == "Title")
 						{
 							cinTitle(&title);
-							deleteTtitle(data, title);
+							deleteTitle(data, title);
 						}
 						else if (sign == "year" || sign == "Year")
 						{
@@ -832,11 +832,13 @@ void SearchData()
 		}
 		output.close();
 	}
+	printTitleSearchStory();
 	cout << "By which data do you want to search? [title / year / place]" << endl;
 	getline(cin, sign);
 	if (sign == "title" || sign == "Title")
 	{
 		system("CLS");
+		printTitleSearchStory();
 		cout << "Enter what you want to search : ";
 		getline(cin, enter);
 		searchTitle(data, enter);
@@ -844,6 +846,7 @@ void SearchData()
 	else if (sign == "year" || sign == "Year")
 	{
 		system("CLS");
+		printTitleSearchStory();
 		cout << "Enter what you want to search : ";
 		getline(cin, enter);
 		searchYear(data, enter);
@@ -851,6 +854,7 @@ void SearchData()
 	else if (sign == "place" || sign == "Place")
 	{
 		system("CLS");
+		printTitleSearchStory();
 		cout << "Enter what you want to search : ";
 		getline(cin, enter);
 		searchPlace(data, enter);

@@ -62,6 +62,9 @@ void printTitleAddStory();
 //Prints ASCII Art title of See story in yellow
 void printTitleSeeStory();
 
+//Prints ASCII Art title of Search Story in yellow
+void printTitleSearchStory();
+
 //Moves arrow on Sign in
 void printActiveSignIn();
 

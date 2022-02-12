@@ -231,6 +231,16 @@ void printTitleSeeStory()
 	cout << "                                                                    |__/" << "\x1b[1;37m" << endl << endl << endl << endl;
 }
 
+//Prints ASCII Art title of Search Story in yellow
+void printTitleSearchStory()
+{
+	cout << "\x1b[1;33m" << "                                     ___                  _      ___ _                " << endl;
+	cout << "                                    / __| ___ __ _ _ _ __| |_   / __| |_ ___ _ _ _  _ " << endl;
+	cout << "                                    \\__ \\/ -_) _` | '_/ _| ' \\  \\__ \\  _/ _ \\ '_| || |" << endl;
+	cout << "                                    |___/\\___\\__,_|_| \\__|_||_| |___/\\__\\___/_|  \\_, |" << endl;
+	cout << "                                                                                 |__/ " << "\x1b[1;37m" << endl << endl << endl << endl;
+}
+
 //Moves arrow on Sign in
 void printActiveSignIn()
 {
