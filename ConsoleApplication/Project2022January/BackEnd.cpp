@@ -40,6 +40,7 @@ struct FORM
 	FORM* next = NULL;
 };
 
+//Inserts new node in linked list
 void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeDataGreyCode, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription)
 {
 	NODE* newNode = new NODE;
@@ -63,6 +64,7 @@ void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeData
 	}
 }
 
+//Adds new node in linked list
 void addUsers(FORM* head, string newUsername, string newPassword)
 {
 	FORM* newNode = new FORM;
@@ -81,7 +83,8 @@ void addUsers(FORM* head, string newUsername, string newPassword)
 	}
 }
 
-bool checkPasswordForSpecialCharecter(char password[], int n)
+//This function checks if the password contains the followin special characters
+bool checkPasswordForSpecialCharacter(char password[], int n)
 {
 	bool aUpper = false, aLower = false, aDigit = false, aChar = false;
 	char character[] = "!@#$%^&*()_+-=,.<>?/|:;";
@@ -123,6 +126,7 @@ bool checkPasswordForSpecialCharecter(char password[], int n)
 	}
 }
 
+//This function converts the password from type string to type char and checks with checkPasswordForSpecialCharacter()
 bool checkPassword(string str)
 {
 	char ch[20];
@@ -130,7 +134,7 @@ bool checkPassword(string str)
 	{
 		ch[i] = str.at(i);
 	}
-	if (checkPasswordForSpecialCharecter(ch, size(str)))
+	if (checkPasswordForSpecialCharacter(ch, size(str)))
 	{
 		return true;
 	}
@@ -140,6 +144,7 @@ bool checkPassword(string str)
 	}
 }
 
+//This function signs the user up and adds data to UsersData.txt
 void signUp()
 {
 	FORM* data = new FORM;
@@ -174,6 +179,7 @@ void signUp()
 	}
 }
 
+//This function checks if the user has a profile
 bool checkProfile()
 {
 	string sign;
@@ -187,6 +193,7 @@ bool checkProfile()
 	return false;
 }
 
+//This function checks if the username and password match with the linked list
 bool searchUsers(FORM* head, string findUser, string findPassword)
 {
 	FORM* temp = head;
@@ -203,6 +210,7 @@ bool searchUsers(FORM* head, string findUser, string findPassword)
 	return false;
 }
 
+//This function checks if the username and password are contained in UsersData.txt
 void signIn(bool* successfullySignIn)
 {
 	FORM* data = new FORM;
@@ -274,12 +282,14 @@ void signIn(bool* successfullySignIn)
 	}
 }
 
+//This function converts the year from type int to gray code
 int decToGrayCode(int number)
 {
 	return number ^ (number >> 1);
 }
 
-void deleteTtitle(NODE* head, string nodeDataTitle)
+//This function deletes title node data from linked list
+void deleteTitle(NODE* head, string nodeDataTitle)
 {
 	NODE* newNode = new NODE;
 	newNode->title = nodeDataTitle;
@@ -287,6 +297,7 @@ void deleteTtitle(NODE* head, string nodeDataTitle)
 	head = newNode;
 }
 
+//This function deletes year node data from linked list
 void deleteYear(NODE* head, string nodeDataYear)
 {
 	NODE* newNode = new NODE;
@@ -295,6 +306,7 @@ void deleteYear(NODE* head, string nodeDataYear)
 	head = newNode;
 }
 
+//This function deletes place node data from linked list
 void deletePlace(NODE* head, string nodeDataPlace)
 {
 	NODE* newNode = new NODE;
@@ -303,6 +315,7 @@ void deletePlace(NODE* head, string nodeDataPlace)
 	head = newNode;
 }
 
+//This function deletes latitude node data from linked list
 void deleteLatitude(NODE* head, string nodeDataLatitude)
 {
 	NODE* newNode = new NODE;
@@ -311,6 +324,7 @@ void deleteLatitude(NODE* head, string nodeDataLatitude)
 	head = newNode;
 }
 
+//This function deletes longitude node data from linked list
 void deleteLongitude(NODE* head, string nodeDataLongitude)
 {
 	NODE* newNode = new NODE;
@@ -319,6 +333,7 @@ void deleteLongitude(NODE* head, string nodeDataLongitude)
 	head = newNode;
 }
 
+//This function deletes description node data from linked list
 void deleteDescription(NODE* head, string nodeDataDescription)
 {
 	NODE* newNode = new NODE;
@@ -327,6 +342,7 @@ void deleteDescription(NODE* head, string nodeDataDescription)
 	head = newNode;
 }
 
+//This function prints the entier linked list
 void printList(NODE* head)
 {
 	NODE* temp = head->next;
@@ -348,6 +364,7 @@ void printList(NODE* head)
 	}
 }
 
+//Checks if data contains comma,colon or semicolon
 bool check(string& data)
 {
 	string sign = data;
@@ -366,6 +383,7 @@ bool check(string& data)
 	}
 }
 
+//Checks if year contains characters other than digits
 bool checkDigit(string& data)
 {
 	string sign = data;
@@ -384,6 +402,7 @@ bool checkDigit(string& data)
 	}
 }
 
+//Checks if year node data exists in Data.csv file
 bool searchExistingYear(string* find)
 {
 	NODE* data = new NODE;
@@ -463,6 +482,7 @@ bool searchExistingYear(string* find)
 	return false;
 }
 
+//This function inputs title node data by the user
 void cinTitle(string* title)
 {
 	printTitleAddStory();
@@ -475,6 +495,7 @@ void cinTitle(string* title)
 	}
 }
 
+//This function inputs year node data by the user
 void cinYear(string* year)
 {
 	printTitleAddStory();
@@ -499,6 +520,7 @@ void cinYear(string* year)
 	}
 }
 
+//This function inputs place node data by the user
 void cinPlace(string* place)
 {
 	printTitleAddStory();
@@ -511,6 +533,7 @@ void cinPlace(string* place)
 	}
 }
 
+//This function inputs latitude node data by the user
 void cinLatitude(string* latitude)
 {
 	printTitleAddStory();
@@ -528,6 +551,7 @@ void cinLatitude(string* latitude)
 	}
 }
 
+//This function inputs longitude node data by the user
 void cinLongitude(string* longitude)
 {
 	printTitleAddStory();
@@ -545,6 +569,7 @@ void cinLongitude(string* longitude)
 	}
 }
 
+//This function inputs description node data by the user
 void cinDescription(string* description)
 {
 	printTitleAddStory();
@@ -556,7 +581,7 @@ void cinDescription(string* description)
 		cinDescription(description);
 	}
 }
-
+//Inputs linked list in Data.csv
 void inputDataInFile()
 {
 	NODE* data = new NODE;
@@ -672,6 +697,7 @@ void inputDataInFile()
 	}
 }
 
+//Searches for title data in the linked list
 bool searchTitle(NODE* head, string find)
 {
 	NODE* temp = head->next;
@@ -693,6 +719,7 @@ bool searchTitle(NODE* head, string find)
 	return false;
 }
 
+//Searches for year data in the linked list
 bool searchYear(NODE* head, string find)
 {
 	NODE* temp = head;
@@ -714,6 +741,7 @@ bool searchYear(NODE* head, string find)
 	return false;
 }
 
+//Searches for place data in the linked list
 bool searchPlace(NODE* head, string find)
 {
 	NODE* temp = head->next;
@@ -735,6 +763,7 @@ bool searchPlace(NODE* head, string find)
 	return false;
 }
 
+//This function searches user inputted data in Data.csv
 void SearchData()
 {
 	NODE* data = new NODE;
@@ -828,6 +857,7 @@ void SearchData()
 	}
 }
 
+//Sorts linked list nodes
 void sortList(NODE** head)
 {
 	NODE* temp = *head;
@@ -858,6 +888,7 @@ void sortList(NODE** head)
 
 }
 
+//Prints sorted data
 void printSortData(NODE** head, NODE** find)
 {
 	NODE** temp = &(*head)->next;
@@ -870,6 +901,7 @@ void printSortData(NODE** head, NODE** find)
 	}
 }
 
+//Converts all data from Data.csv file into a linked list and prints it
 void readDataFromFile()
 {
 	NODE* data = new NODE;
@@ -960,6 +992,7 @@ void readDataFromFile()
 	}
 }
 
+//This function prints the menu and implements movement in the menu
 bool loopmovement(int choice)
 {
 	bool successfullySignIn = false;
