@@ -169,7 +169,6 @@ void signUp()
 		system("CLS");
 		cout << "\x1b[1;31m" "The password must contain uppercase, lowercase letters and special characters. It must be not less than 8 and not more than 20 characters" << "\x1b[1;37m" << endl << endl;
 		system("pause");
-		system("read -n 1 -p \"Press any key to continue . . .\"");
 		system("CLS");
 		signUp();
 	}
@@ -389,6 +388,85 @@ void checkDigit(bool dataAddCorrectly, string& data)
 	}
 }
 
+bool searchExistingYear(string* find)
+{
+	NODE* data = new NODE;
+	ifstream output("Data.csv", ios_base::app);
+	string title, year, greyCode, place, latitude, longitude, description;
+	int counter = 0;
+	string str;
+	int firstRow = 0;
+	if (!output.is_open())
+	{
+		cout << "Error opening file";
+	}
+	else
+	{
+		while (!output.eof())
+		{
+			getline(output, str);
+			if (firstRow > 0 && str != "")
+			{
+				counter = 0;
+				title = year = greyCode = place = latitude = longitude = description = "";
+				for (size_t i = 0; i < str.size(); i++)
+				{
+					if (str[i] == ',' && counter < 6)
+					{
+						counter++;
+						str.erase(i, 0);
+					}
+					else if (str[i] == '"')
+					{
+						str.erase(i, 0);
+					}
+					else if (counter == 0)
+					{
+						title += str[i];
+					}
+					else if (counter == 1)
+					{
+						year += str[i];
+					}
+					else if (counter == 2)
+					{
+						greyCode += str[i];
+					}
+					else if (counter == 3)
+					{
+						place += str[i];
+					}
+					else if (counter == 4)
+					{
+						latitude += str[i];
+					}
+					else if (counter == 5)
+					{
+						longitude += str[i];
+					}
+					else if (counter == 6)
+					{
+						description += str[i];
+					}
+				}
+				addNode(data, title, year, stoi(greyCode), place, latitude, longitude, description);
+			}
+			firstRow++;
+		}
+		output.close();
+
+	}
+	while (data != NULL)
+	{
+		if (*find == data->year)
+		{
+			return true;
+		}
+		data = data->next;
+	}
+	return false;
+}
+
 void cinTitle(string* title, bool dataAddCorrectly)
 {
 	printTitleAddStory();
@@ -410,6 +488,13 @@ void cinYear(string* year, bool dataAddCorrectly)
 	dataAddCorrectly = false;
 	checkDigit(dataAddCorrectly, *year);
 	dataAddCorrectly = false;
+	if (searchExistingYear(year))
+	{
+		cout << "This year exists, please type new year!" << endl;
+		system("pause");
+		system("CLS");
+		cinYear(year, dataAddCorrectly);
+	}
 }
 
 void cinPlace(string* place, bool dataAddCorrectly)

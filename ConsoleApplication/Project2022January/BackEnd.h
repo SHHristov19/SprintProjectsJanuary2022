@@ -61,6 +61,8 @@ void check(bool dataAddCorrectly, string& data);
 
 void checkDigit(bool dataAddCorrectly, string& data);
 
+bool searchExistingYear();
+
 void cinTitle(string* title, bool dataAddCorrectly);
 
 void cinYear(string* year, bool dataAddCorrectly);
