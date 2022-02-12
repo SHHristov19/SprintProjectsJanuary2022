@@ -63,10 +63,10 @@ void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeData
 	}
 }
 
-void addUsers(FORM* head, string newusername, string newPassword)
+void addUsers(FORM* head, string newUsername, string newPassword)
 {
 	FORM* newNode = new FORM;
-	newNode->username = newusername;
+	newNode->username = newUsername;
 	newNode->password = newPassword;
 	newNode->next = NULL;
 	FORM* temp = head;
@@ -174,7 +174,7 @@ void signUp()
 	}
 }
 
-bool chechProfile()
+bool checkProfile()
 {
 	string sign;
 	cout << "Do you have a profile? [Y/N]    ";
@@ -212,7 +212,7 @@ void signIn(bool* successfullySignIn)
 	string sign;
 	string str;
 	int firstRow = 0;
-	if (chechProfile())
+	if (checkProfile())
 	{
 
 
@@ -348,43 +348,39 @@ void printList(NODE* head)
 	}
 }
 
-void check(bool dataAddCorrectly, string& data)
+bool check(string& data)
 {
-	string check = data;
-	while (dataAddCorrectly == false)
+	string sign = data;
+	if (sign.find(',') != string::npos || sign.find(':') != string::npos || sign.find(';') != string::npos)
 	{
-		if (check.find(',') != string::npos || check.find(':') != string::npos || check.find(';') != string::npos)
-		{
-			system("CLS");
-			cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m";
-			getline(cin, check);
-			data = check;
-		}
-		else
-		{
-			dataAddCorrectly = true;
-			system("CLS");
-		}
+		system("CLS");
+		cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m";
+		system("pause");
+		system("CLS");
+		return false;
+	}
+	else
+	{
+		system("CLS");
+		return true;
 	}
 }
 
-void checkDigit(bool dataAddCorrectly, string& data)
+bool checkDigit(string& data)
 {
-	string check = data;
-	while (dataAddCorrectly == false)
+	string sign = data;
+	if (sign.find_first_not_of("0123456789.-") != string::npos)
 	{
-		if (check.find_first_not_of("0123456789.-") != string::npos)
-		{
-			system("CLS");
-			cout << "\x1b[1;31m" << "  !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m";
-			getline(cin, check);
-			data = check;
-		}
-		else
-		{
-			dataAddCorrectly = true;
-			system("CLS");
-		}
+		system("CLS");
+		cout << "\x1b[1;31m" << "  !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m";
+		system("pause");
+		system("CLS");
+		return false;
+	}
+	else
+	{
+		system("CLS");
+		return true;
 	}
 }
 
@@ -467,87 +463,105 @@ bool searchExistingYear(string* find)
 	return false;
 }
 
-void cinTitle(string* title, bool dataAddCorrectly)
+void cinTitle(string* title)
 {
 	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the title of the History event : ";
 	getline(cin, *title);
-	check(dataAddCorrectly, *title);
-	dataAddCorrectly = false;
+	if (check(*title) == false)
+	{
+		cinTitle(title);
+	}
 }
 
-void cinYear(string* year, bool dataAddCorrectly)
+void cinYear(string* year)
 {
 	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the year of the History event : ";
 	getline(cin, *year);
-	check(dataAddCorrectly, *year);
-	dataAddCorrectly = false;
-	checkDigit(dataAddCorrectly, *year);
-	dataAddCorrectly = false;
+	if (check(*year) == false)
+	{
+		cinYear(year);
+	}
+	if (checkDigit(*year) == false)
+	{
+		cinYear(year);
+	}
 	if (searchExistingYear(year))
 	{
-		cout << "This year exists, please type new year!" << endl;
+		cout << "This year exists, please type new year!" << endl << endl;
 		system("pause");
 		system("CLS");
-		cinYear(year, dataAddCorrectly);
+		cinYear(year);
 	}
 }
 
-void cinPlace(string* place, bool dataAddCorrectly)
+void cinPlace(string* place)
 {
 	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter where exactly happened this event : ";
 	getline(cin, *place);
-	check(dataAddCorrectly, *place);
-	dataAddCorrectly = false;
+	if (check(*place) == false)
+	{
+		cinPlace(place);
+	}
 }
 
-void cinLatitude(string* latitude, bool dataAddCorrectly)
+void cinLatitude(string* latitude)
 {
 	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
-	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "\x1b[1;31m" << "     !!! USE ONLY DIGITS, POINT OR MINUS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the latitude of this place : ";
 	getline(cin, *latitude);
-	check(dataAddCorrectly, *latitude);
-	dataAddCorrectly = false;
-	checkDigit(dataAddCorrectly, *latitude);
-	dataAddCorrectly = false;
+	if (check(*latitude) == false)
+	{
+		cinLatitude(latitude);
+	}
+	if (checkDigit(*latitude) == false)
+	{
+		cinLatitude(latitude);
+	}
 }
 
-void cinLongitude(string* longitude, bool dataAddCorrectly)
+void cinLongitude(string* longitude)
 {
 	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
-	cout << "\x1b[1;31m" << "           !!! USE ONLY DIGITS !!!  " << "\x1b[1;37m" << endl << endl;
+	cout << "\x1b[1;31m" << "     !!! USE ONLY DIGITS, POINT OR MINUS !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter the longitude of this place : ";
 	getline(cin, *longitude);
-	check(dataAddCorrectly, *longitude);
-	dataAddCorrectly = false;
-	checkDigit(dataAddCorrectly, *longitude);
-	dataAddCorrectly = false;
+	if (check(*longitude) == false)
+	{
+		cinLongitude(longitude);
+	}
+	if (checkDigit(*longitude) == false)
+	{
+		cinLongitude(longitude);
+	}
 }
 
-void cinDescription(string* description, bool dataAddCorrectly)
+void cinDescription(string* description)
 {
 	printTitleAddStory();
 	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter what's happened in this place : ";
 	getline(cin, *description);
-	check(dataAddCorrectly, *description);
-	dataAddCorrectly = false;
+	if (check(*description) == false)
+	{
+		cinDescription(description);
+	}
 }
 
 void inputDataInFile()
 {
 	NODE* data = new NODE;
 	string title, year, place, latitude, longitude, description;
-	bool dataAddCorrectly = false, truth = true, question;
+	bool truth = true, question;
 	int greyCode, choice = 1;
 	string sign;
 	ofstream file("Data.csv", ios_base::app);
@@ -556,13 +570,13 @@ void inputDataInFile()
 		switch (choice)
 		{
 		case 1:
-			cinTitle(&title, dataAddCorrectly);
-			cinYear(&year, dataAddCorrectly);
+			cinTitle(&title);
+			cinYear(&year);
 			greyCode = decToGrayCode(stoi(year));
-			cinPlace(&place, dataAddCorrectly);
-			cinLatitude(&latitude, dataAddCorrectly);
-			cinLongitude(&longitude, dataAddCorrectly);
-			cinDescription(&description, dataAddCorrectly);
+			cinPlace(&place);
+			cinLatitude(&latitude);
+			cinLongitude(&longitude);
+			cinDescription(&description);
 			addNode(data, title, year, greyCode, place, latitude, longitude, description);
 			system("CLS");
 			printTitleAddStory();
@@ -578,40 +592,42 @@ void inputDataInFile()
 					getline(cin, sign);
 					if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 					{
-						cout << endl << "Which data do you want to change?  [title/year/place/latitude/description] " << endl;
+						cout << endl << "Which data do you want to change?  [title/year/place/latitude/longitude/description] " << endl;
 						getline(cin, sign);
 						cout << endl;
+						system("CLS");
 						if (sign == "title" || sign == "Title")
 						{
-							cinTitle(&title, dataAddCorrectly);
+							cinTitle(&title);
 							deleteTtitle(data, title);
 						}
 						else if (sign == "year" || sign == "Year")
 						{
-							cinYear(&year, dataAddCorrectly);
+							cinYear(&year);
 							greyCode = decToGrayCode(stoi(year));
 							deleteYear(data, year);
 						}
 						else if (sign == "place" || sign == "Place")
 						{
-							cinPlace(&year, dataAddCorrectly);
+							cinPlace(&place);
 							deletePlace(data, place);
 						}
 						else if (sign == "latitude" || sign == "Latitude")
 						{
-							cinLatitude(&latitude, dataAddCorrectly);
+							cinLatitude(&latitude);
 							deleteLatitude(data, latitude);
 						}
 						else if (sign == "longitude" || sign == "Longitude")
 						{
-							cinLongitude(&longitude, dataAddCorrectly);
+							cinLongitude(&longitude);
 							deleteLongitude(data, longitude);
 						}
 						else if (sign == "description" || sign == "Description")
 						{
-							cinDescription(&year, dataAddCorrectly);
+							cinDescription(&description);
 							deleteDescription(data, description);
 						}
+						printTitleAddStory();
 						cout << "Do you want to see what you add? [Y/N]" << endl;
 						getline(cin, sign);
 						if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")

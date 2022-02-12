@@ -27,7 +27,7 @@ struct FORM;
 
 void addNode(NODE* head, string nodeDataTitle, string nodeDataYear, int nodeDataGreyCode, string nodeDataPlace, string nodeDataLatitude, string nodeDataLongitude, string nodeDataDescription);
 
-void addUsers(FORM* head, string newusername, string newPassword);
+void addUsers(FORM* head, string newUsername, string newPassword);
 
 bool checkPasswordForSpecialCharecter(char password[], int n);
 
@@ -35,7 +35,7 @@ bool checkPassword(string str);
 
 void signUp();
 
-bool chechProfile();
+bool checkProfile();
 
 bool searchUsers(FORM* head, string findUser, string findPassword);
 
@@ -57,23 +57,23 @@ void deleteDescription(NODE* head, string nodeDataDescription);
 
 void printList(NODE* head);
 
-void check(bool dataAddCorrectly, string& data);
+bool check(string& data);
 
-void checkDigit(bool dataAddCorrectly, string& data);
+bool checkDigit(string& data);
 
-bool searchExistingYear();
+bool searchExistingYear(string* find);
 
-void cinTitle(string* title, bool dataAddCorrectly);
+void cinTitle(string* title);
 
-void cinYear(string* year, bool dataAddCorrectly);
+void cinYear(string* year);
 
-void cinPlace(string* place, bool dataAddCorrectly);
+void cinPlace(string* place);
 
-void cinLatitude(string* latitude, bool dataAddCorrectly);
+void cinLatitude(string* latitude);
 
-void cinLongitude(string* longitude, bool dataAddCorrectly);
+void cinLongitude(string* longitude);
 
-void cinDescription(string* description, bool dataAddCorrectly);
+void cinDescription(string* description);
 
 void inputDataInFile();
 
