@@ -573,14 +573,10 @@ void cinLongitude(string* longitude)
 void cinDescription(string* description)
 {
 	printTitleAddStory();
-	cout << "\x1b[1;31m" << "  !!! DO NOT USE A COMMA, COLON OR SEMICOLON !!!  " << "\x1b[1;37m" << endl << endl;
 	cout << "Enter what's happened in this place : ";
 	getline(cin, *description);
-	if (check(*description) == false)
-	{
-		cinDescription(description);
-	}
 }
+
 //Inputs linked list in Data.csv
 void inputDataInFile()
 {
@@ -668,7 +664,7 @@ void inputDataInFile()
 				}
 			}
 
-			file << title << "," << year << "," << greyCode << "," << place << "," << latitude << "," << longitude << "," << description << endl;
+			file << title << "," << year << "," << greyCode << "," << place << "," << latitude << "," << longitude << ",\"" << description << "\"" << endl;
 
 			system("CLS");
 			printTitleAddStory();
@@ -730,6 +726,28 @@ bool searchYear(NODE* head, string find)
 			cout << endl << "Title : " << temp->title << endl;
 			cout << "\x1b[1;33m" << "Year : " << temp->year << "\x1b[1;37m" << endl;
 			cout << "Grey code of the year : " << temp->greyCode << endl;
+			cout << "Place : " << temp->place << endl;
+			cout << "Latitude : " << temp->latitude << endl;
+			cout << "Longitude : " << temp->longitude << endl;
+			cout << "Description : " << temp->description << endl;
+			return true;
+		}
+		temp = temp->next;
+	}
+	return false;
+}
+
+//Searches for grey code data in the linked list
+bool searchGreyCode(NODE* head, int find)
+{
+	NODE* temp = head;
+	while (temp != NULL)
+	{
+		if (temp->greyCode == find)
+		{
+			cout << endl << "Title : " << temp->title << endl;
+			cout << "Year : " << temp->year << endl;
+			cout << "\x1b[1;33m" << "Grey code of the year : " << temp->greyCode << "\x1b[1;37m" << endl;
 			cout << "Place : " << temp->place << endl;
 			cout << "Latitude : " << temp->latitude << endl;
 			cout << "Longitude : " << temp->longitude << endl;
@@ -861,11 +879,11 @@ void SearchData()
 	}
 }
 
-//Sorts linked list nodes
-void sortList(NODE** head)
+//Sorts linked list nodes by year
+void sortListByYear(NODE** head)
 {
 	NODE* temp = *head;
-	string tempNode, sign;
+	string tempNode;
 	NODE* tempHead = new NODE;
 	NODE* tempNext = NULL;
 	head = &(*head)->next;
@@ -888,12 +906,39 @@ void sortList(NODE** head)
 		tempNext = tempHead;
 
 	} while (swapped);
-
-
 }
 
-//Prints sorted data
-void printSortData(NODE** head, NODE** find)
+//Sorts linked list nodes by grey code
+void sortListByGreyCode(NODE** head)
+{
+	NODE* temp = *head;
+	int tempNode;
+	NODE* tempHead = new NODE;
+	NODE* tempNext = NULL;
+	head = &(*head)->next;
+	int swapped;
+	do
+	{
+		swapped = 0;
+		tempHead = *head;
+		while (tempHead->next != tempNext)
+		{
+			if (tempHead->greyCode >= tempHead->next->greyCode)
+			{
+				tempNode = tempHead->greyCode;
+				tempHead->greyCode = tempHead->next->greyCode;
+				tempHead->next->greyCode = tempNode;
+				swapped = 1;
+			}
+			tempHead = tempHead->next;
+		}
+		tempNext = tempHead;
+
+	} while (swapped);
+}
+
+//Prints sorted data by year
+void printSortDataByYear(NODE** head, NODE** find)
 {
 	NODE** temp = &(*head)->next;
 	string findStr = "";
@@ -901,6 +946,19 @@ void printSortData(NODE** head, NODE** find)
 	{
 		findStr = (*find)->year;
 		searchYear(*temp, findStr);
+		find = &(*find)->next;
+	}
+}
+
+//Prints sorted data by grey code
+void printSortDataGreyCode(NODE** head, NODE** find)
+{
+	NODE** temp = &(*head)->next;
+	int findStr = 0;
+	while (*find)
+	{
+		findStr = (*find)->greyCode;
+		searchGreyCode(*temp, findStr);
 		find = &(*find)->next;
 	}
 }
@@ -983,14 +1041,24 @@ void readDataFromFile()
 	if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 	{
 		printList(data);
-		cout << "Do you want to sort data by year? [Y/N]" << endl;
+		cout << "Do you want to sort data? [Y/N]" << endl;
 		getline(cin, sign);
 		if (sign == "Y" || sign == "Yes" || sign == "y" || sign == "yes")
 		{
+			cout << "By what do you want to sort? [year/greyCode]" << endl;
+			getline(cin, sign);
 			system("CLS");
 			printTitleSeeStory();
-			sortList(&data);
-			printSortData(&temp, &data);
+			if (sign == "year" || sign == "Year")
+			{
+				sortListByYear(&data);
+				printSortDataByYear(&temp, &data);
+			}
+			else if (sign == "greyCode" || sign == "grey code")
+			{
+				sortListByGreyCode(&data);
+				printSortDataGreyCode(&temp, &data);
+			}
 		}
 
 	}

@@ -109,17 +109,26 @@ bool searchTitle(NODE* head, string find);
 //Searches for year data in the linked list
 bool searchYear(NODE* head, string find);
 
+//Searches for grey code data in the linked list
+bool searchGreyCode(NODE* head, int find);
+
 //Searches for place data in the linked list
 bool searchPlace(NODE* head, string find);
 
 //This function searches user inputted data in Data.csv
 void SearchData(); 
 
-//Sorts linked list nodes
-void sortList(NODE** head);
+//Sorts linked list nodes by year
+void sortListByYear(NODE** head);
 
-//Prints sorted data
-void printSortData(NODE** head, NODE** find);
+//Sorts linked list nodes by grey code
+void sortListByGreyCode(NODE** head);
+
+//Prints sorted data by year
+void printSortDataByYear(NODE** head, NODE** find);
+
+//Prints sorted data by grey code
+void printSortDataGreyCode(NODE** head, NODE** find);
 
 //Converts all data from Data.csv file into a linked list and prints it
 void readDataFromFile();
