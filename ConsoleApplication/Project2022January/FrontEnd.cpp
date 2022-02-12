@@ -2,7 +2,8 @@
 #include "FrontEnd.h"
 using namespace std;
 
-void activeSignIn()
+//Sets on Sign In and prints a part of the menu
+void activeSignIn() 
 {
 	cout << endl << endl << endl << endl << endl << endl;
 	cout << "\x1b[0;33m" << "                                    _____ / \\ ========================================================== / \\ _____" << endl;
@@ -30,6 +31,7 @@ void activeSignIn()
 	cout << "                                              \\                                                      /   " << endl;
 }
 
+//Prints Sign In on the start menu and prints a part of the menu
 void writeSignIn()
 {
 	cout << endl << endl << endl << endl << endl << endl;
@@ -58,6 +60,7 @@ void writeSignIn()
 	cout << "                                              \\                                                      /   " << endl;
 }
 
+//Sets arrow on See Story
 void activeSeeStory()
 {
 	cout << "                                              |                                                      \\ " << endl;
@@ -65,6 +68,7 @@ void activeSeeStory()
 	cout << "                                                |                                                    /" << endl;
 }
 
+//Prints See Story on the start menu
 void writeSeeStory()
 {
 	cout << "                                              |                                                      \\ " << endl;
@@ -72,6 +76,7 @@ void writeSeeStory()
 	cout << "                                                |                                                    /" << endl;
 }
 
+//Prints Add Story on the start menu
 void writeAddStory()
 {
 	cout << "                                                /                                                    \\" << endl;
@@ -79,6 +84,7 @@ void writeAddStory()
 	cout << "                                               |                                                      |" << endl;
 }
 
+//Sets arrow on Add Story
 void activeAddStory()
 {
 	cout << "                                                /                                                    \\" << endl;
@@ -86,6 +92,7 @@ void activeAddStory()
 	cout << "                                               |                                                      |" << endl;
 }
 
+//Prints Search Story on the start menu
 void writeSearch()
 {
 	cout << "                                               |                                                      |" << endl;
@@ -93,6 +100,7 @@ void writeSearch()
 	cout << "                                               |                                                      \\" << endl;
 }
 
+//Sets arrow on Search Story
 void activeSearch()
 {
 	cout << "                                               |                                                      |" << endl;
@@ -100,18 +108,21 @@ void activeSearch()
 	cout << "                                               |                                                      \\" << endl;
 }
 
+//Print How it works on the start menu
 void writeHowItWorks()
 {
 	cout << "                                               \\                                                       /" << endl;
 	cout << "                                               /                   How it works                        |" << endl;
 }
 
+//Sets arrow on How it works
 void activeHowItWorks()
 {
 	cout << "                                               \\                                                       /" << endl;
 	cout << "                                               /                  " << "\x1b[1;33m" << "-> How it works" << "\x1b[1;37m" << "                      | " << endl;
 }
 
+//Prints About us on the start menu
 void writeAboutUs()
 {
 	cout << "                                              \\                                                       /" << endl;
@@ -122,6 +133,7 @@ void writeAboutUs()
 
 }
 
+//Sets arrow on About us
 void activeAboutUs()
 {
 	cout << "                                              \\                                                       /" << endl;
@@ -131,6 +143,7 @@ void activeAboutUs()
 	cout << "                                               |                                                       |  " << endl;
 }
 
+//Prints Exit on the start menu
 void writeExit()
 {
 	cout << "                                               |                   Exit                                \\" << endl;
@@ -144,6 +157,7 @@ void writeExit()
 	cout << "                                          \\ / ========================================================== \\ /" << "\x1b[1;37m" << endl;
 }
 
+//Sets arrow on Exit
 void activeExit()
 {
 	cout << "                                               |                  " << "\x1b[1;33m" << "-> Exit" << "\x1b[1;37m" << "                              \\" << endl;
@@ -157,12 +171,14 @@ void activeExit()
 	cout << "                                          \\ / ========================================================== \\ /" << "\x1b[1;37m" << endl;
 }
 
+//Prints "Back" on a selected option allowing you to return
 void writeBackWhite()
 {
 	cout << endl << endl;
 	cout << "<- Back" << endl;
 }
 
+//Prints ASCII Art title and information about the team
 void printAboutUs()
 {
 	cout << "\x1b[1;33m" << "                         _   _              _     _   _    " << endl;
@@ -177,6 +193,7 @@ void printAboutUs()
 	cout << "       Todor Zafirov - Scrum Trainer" << endl;
 }
 
+//Prints ASCII Art title of Add Story in yellow
 void printTitleHowItWorks()
 {
 	cout << "\x1b[1;33m" << "                                     _  _              _ _                    _       " << endl;
@@ -185,6 +202,7 @@ void printTitleHowItWorks()
 	cout << "                                    |_||_\\___/\\_/\\_/  |_|\\__|  \\_/\\_/\\___/_| |_\\_\\/__/" << "\x1b[1;37m" << endl << endl << endl << endl; 
 }
 
+//Prints information about the program and how it must be used
 void printHowItWorks()
 {
 	cout << "                   1. You have to sign in in order to have access!" << endl;
@@ -193,6 +211,7 @@ void printHowItWorks()
 	cout << "                   4. Then you can see it or search it using See Story or Search story options." << endl;
 }
 
+//Prints ASCII Art title of Add Story in yellow
 void printTitleAddStory()
 {
 	cout << "\x1b[1;33m" << "                                       _      _    _   ___ _                " << endl;
@@ -202,6 +221,7 @@ void printTitleAddStory()
 	cout << "                                                                       |__/ " << "\x1b[1;37m" << endl << endl << endl << endl;
 }
 
+//Prints ASCII Art title of See story in yellow
 void printTitleSeeStory()
 {
 	cout << "\x1b[1;33m" << "                                     ___            ___ _                " << endl;
@@ -211,6 +231,7 @@ void printTitleSeeStory()
 	cout << "                                                                    |__/" << "\x1b[1;37m" << endl << endl << endl << endl;
 }
 
+//Moves arrow on Sign in
 void printActiveSignIn()
 {
 	activeSignIn();
@@ -222,6 +243,7 @@ void printActiveSignIn()
 	writeExit();
 }
 
+//Moves arrow on See Story
 void printActiveSeeStory()
 {
 	writeSignIn();
@@ -233,6 +255,7 @@ void printActiveSeeStory()
 	writeExit();
 }
 
+//Moves arrow on Add Story
 void printActiveAddStory()
 {
 	writeSignIn();
@@ -244,6 +267,7 @@ void printActiveAddStory()
 	writeExit();
 }
 
+//Moves arrow on Search Story
 void printActiveSearch()
 {
 	writeSignIn();
@@ -255,6 +279,7 @@ void printActiveSearch()
 	writeExit();
 }
 
+//Moves arrow on How it works
 void printActiveHowItWorks()
 {
 	writeSignIn();
@@ -266,6 +291,7 @@ void printActiveHowItWorks()
 	writeExit();
 }
 
+//Moves arrow on About us
 void printActiveAboutUs()
 {
 	writeSignIn();
@@ -277,6 +303,7 @@ void printActiveAboutUs()
 	writeExit();
 }
 
+//Moves arrow on Exit
 void printActiveExit()
 {
 	writeSignIn();
