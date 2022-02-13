@@ -33,15 +33,17 @@ Our idea of the project is to create a program in C++ with which we can enter da
 > Zlatomir Kostadinov - [ZGKostadinov19](https://github.com/ZGKostadinov19) - Quality Assurance <br><br>
 
 # ArcGIS Website <a name = "website"></a>
-If you want to see our website click [here]() <br><br>
+#### If you want to see our website click [here](https://experience.arcgis.com/experience/bd98bca1d5e0411eb17cf697cc7726e5/) <br><br>
 
 # 📝 Documentation and Presentation <a name = "documents"></a>
 
-#### For the documentation click [here]()  
+#### For the documentation click [here](https://codingburgas-my.sharepoint.com/:b:/g/personal/shhristov19_codingburgas_bg/EQVZDUd-ncVFv-hjFKQUVuEBYYcDZ-EUOSmynWn7cWx16Q?e=SKmU2N)  
 
 #### For the QA documentation click [here](https://codingburgas-my.sharepoint.com/:x:/g/personal/shhristov19_codingburgas_bg/ETByxnaCwO5InVtXQZuMlnMB7YLpHPf_Z3sWqQX-BLvGng?rtime=Aq3uuRPv2Ug)  
 
-#### For the presentation click [here]() <br><br>
+#### For the presentation click [here](https://codingburgas-my.sharepoint.com/:p:/g/personal/shhristov19_codingburgas_bg/EW0jCAP72bFPqxHLwqrAbTMBjVNlxoOXqQj3n_n5JJE20Q?e=ct00c0) <br>
+
+#### For the block scheme of code click [here](https://www.edrawmax.com/online/share.html?code=54b02bd68ce711ecbc1b0a54be41f961) <br><br>
 
 
 # ⚙️ Installation <a name = "install"></a>
