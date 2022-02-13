@@ -39,7 +39,7 @@ If you want to see our website click [here]() <br><br>
 
 #### For the documentation click [here]()  
 
-#### For the QA documentation click [here]()  
+#### For the QA documentation click [here](https://codingburgas-my.sharepoint.com/:x:/g/personal/shhristov19_codingburgas_bg/ETByxnaCwO5InVtXQZuMlnMB7YLpHPf_Z3sWqQX-BLvGng?rtime=Aq3uuRPv2Ug)  
 
 #### For the presentation click [here]() <br><br>
 
